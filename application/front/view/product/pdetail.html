@@ -1,0 +1,88 @@
+<body>
+    <div class="wrapper">
+        <div class="banner">
+            <img src="{$product.logo}" alt="">
+        </div>
+        <div class="product">
+            <div class="product-top">
+                <div class="product-name">
+                    <span class="product-title">{$product.name}</span><br />
+                    <span class="product-style">{$product.productType.name}</span>
+                </div>
+                <div class="product-price">
+                    <span>单次价：<i>{$product.price_once}</i>&nbsp;元</span>
+                    <span>
+                        疗程价：
+                        {if condition="( $product.price_all > 0 ) AND ($product.all_need_ci > 0 ) "}
+                            <i>{$product.price_all}</i>&nbsp;元&nbsp;/&nbsp;<i>{$product.all_need_ci}</i>&nbsp;次
+                            {else /} 
+                            无
+                        {/if}                       
+                    </span>
+                </div>
+            </div>
+            <div class="product-content">
+                <div class="series detail-box">
+                    <div class="title">项目系列</div>
+                    <div class="content">
+                        {php}
+                            if(!empty($product->productXilie)){
+                                foreach ($product->productXilie as $v) {
+                                    $xielies[] = $v['name'];
+                                }
+                                $xielies = empty($xielies)? '无' : implode(' , ', $xielies);
+                                echo $xielies;
+                            }
+                        {/php}
+                    </div>
+                </div>
+            </div>
+            <div class="product-content">
+                <div class="time detail-box">
+                    <div class="title">单次护理时间</div>
+                    <div class="content">{$product.huli_time}</div>
+                </div>
+            </div>
+            <div class="product-content">
+                <div class="principle detail-box">
+                    <div class="title">治疗原理</div>
+                    <div class="content">
+                        {$product.yuanli}
+                    </div>
+                </div>
+            </div>
+            <div class="product-content">
+                <div class="process detail-box">
+                    <div class="title">治疗过程</div>
+                    <div class="content">{$product.guocheng}</div>
+                </div>
+            </div>
+            <div class="product-content">
+                <div class="skin detail-box">
+                    <div class="title">对应肌肤问题</div>
+                    <div class="content">
+                        <ul>
+                            {php}$pifu_problemes = explode('|', $product->pifu_problem);{/php}
+                            {volist name="pifu_problemes" id="vo"}
+                                <li><span></span>{$vo}</li>
+                            {/volist}
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            <div class="product-content">
+                <div class="effect detail-box">
+                    <div class="title">护理功效</div>
+                    <div class="content">
+                        <ul>
+                            {php}$gongxiaoes = explode('|', $product->huli_gongxiao);{/php}
+                            {volist name="gongxiaoes" id="vo"}
+                                <li><span></span>{$vo}</li>
+                            {/volist}
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>

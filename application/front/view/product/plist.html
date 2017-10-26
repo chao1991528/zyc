@@ -1,0 +1,35 @@
+<body>
+    <div class="wrapper" id="wrapper">
+        <div id="scroller">
+            <div id="pullDown">
+                <span class="pullDownIcon"></span><span class="pullDownLabel">下拉刷新...</span>
+            </div>
+            <ul id="thelist">
+                {volist name="products" id="vo" empty="暂时没有数据"}
+                <li>
+                    <a href="{:url('front/product/pdetail', 'id='.$vo.id)}" class="clearBoth">
+                        <div class="series-picture">
+                            <img src="{$vo.logo}" alt="">
+                        </div>
+                        <div class="series-title productList">
+                            <div class="product-name">{$vo.name}</div>
+                            <div class="product-category">{$vo.productType.name}</div>
+                        </div>
+                        <div class="series-in">
+                            <img src="/static/front/images/right.png" alt="">
+                        </div>
+                    </a>
+                </li>
+                {/volist}
+            </ul>
+            <div id="pullUp" {lt name="products|count" value="8"}style="display:none"{/lt}>
+                <span class="pullUpIcon"></span><span class="pullUpLabel">上拉加载更多...</span>
+            </div>   
+        </div>
+    </div>
+</body>
+<script>
+    var tid = "{$Request.param.tid}";
+    var xid = "{$Request.param.xid}";
+    var moreUrl = "{:url('@api/product/doPlist')}";
+</script>

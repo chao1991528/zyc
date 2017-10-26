@@ -1,0 +1,6 @@
+html,body{background:#fff;}
+.wrapper li{font-size:0.24rem;color:#333;height:0.8rem;line-height:0.8rem;border-bottom:1px dashed #d0cfce;padding-left:0.24rem;margin-right:0.2rem;box-sizing:border-box;}
+.wrapper li a{display:block;}
+.wrapper li a>div{float:left;}
+.wrapper li a .right{float:right;}
+.right img{display:block;width:0.32rem;height:0.32rem;margin-top:0.24rem;margin-right:0.2rem;}

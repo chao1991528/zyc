@@ -1,0 +1,14 @@
+<body>
+    <div class="wrapper">
+        <ul>
+            {volist name="levels" id="vo"}
+            <li>
+                <a href='{:url("front/memberlevel/mdetail", "id=".$vo.id)}'  class="clearBoth">
+                    <div>{$vo.name}</div>
+                    <div class="right"><img src="/static/front/images/right.png" alt=""></div>
+                </a>
+            </li>
+            {/volist}
+        </ul>
+    </div>
+</body>

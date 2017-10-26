@@ -1,0 +1,71 @@
+<!-- 右边 start -->
+<div class="rightPage">
+    <div class="rightPagein">
+        <div class="place">
+            <span>位置：</span>
+            <ul class="placeul">
+                <li><a href="javascript:;">管理信息</a></li>
+                <li><a href="javascript:;">产品系列管理</a></li>
+            </ul>
+        </div>	    
+        <div class="rightinfo">    
+            <div class="tools">			    
+                <ul class="toolbar">
+                    <li class="click"><span><img src="/static/images/t01.png" /></span>添加</li>
+                    <li><span><img src="/static/images/t03.png" /></span>删除</li> 
+                </ul>	
+            </div>	
+            <table id="typeList" class="table table-striped table-bordered" width="100%" cellspacing="0">
+                <thead>
+                    <tr>
+                        <th style=""><input type="checkbox" class="checkall" /></th>
+                        <th>编号</th>
+                        <th>系列名称</th>
+                        <th>图标</th>
+                        <th>排序</th>
+                        <th>创建时间</th>
+                        <th class="text-center">操作</th>
+                    </tr>
+                </thead>
+            </table>            
+        </div>
+    </div>
+</div>
+<form id="form" class="hidden">
+    <div class="formbody">       
+        <div class="formtitle"><b><span></span><span>产品系列</span></b></div>
+        <ul class="forminfo">
+            <input type="hidden" name="id"/>
+            <li>
+                <label>系列名称</label>
+                <input name="name" type="text" class="dfinput" placeholder="系列名称不能超过50个字符" value=""/><b></b>
+            </li>
+            <li>
+                <label>系列图标</label>
+                <input type="hidden" name="logo"/>
+                <div class="layui-upload">
+                    <button type="button" class="layui-btn" id="typeLogo">上传图片</button>
+                    <div class="layui-upload-list" style="margin-left: 84px;">
+                        <img class="layui-upload-img" id="uploaded" style="width:100px;"/>
+                        <p id="demoText"></p>
+                    </div>
+                </div> 
+            </li>
+            <!--<li><label>排序</label><cite><input name="" type="radio" value="" checked="checked" />是&nbsp;&nbsp;&nbsp;&nbsp;<input name="" type="radio" value="" />否</cite></li>-->
+            <li><label>排序</label><input name="sort" type="text" class="dfinput" value="" placeholder="数组越大越靠前,默认0"/></li>
+            <!--<li><label>文章内容</label><textarea name="" cols="" rows="" class="textinput"></textarea></li>-->
+            <li style="margin-top: 25px;margin-bottom: 40px;">
+                <input type="button" class="btn btn-primary submitBtn" value=""/>
+            </li>
+        </ul>
+    </div>
+</form>
+<!-- 右边 end -->
+<script>
+    var delUrl = "{:url('@api/xilie/doDelXilie')}";
+    var uploadUrl = "{:url('@api/index/doUpload')}";
+    var addUrl = "{:url('@api/xilie/doAddXilie')}";
+    var editUrl = "{:url('@api/xilie/doEditXilie')}";
+    var viewUrl = "{:url('@api/xilie/viewXilie')}";
+    var dTable;
+</script>

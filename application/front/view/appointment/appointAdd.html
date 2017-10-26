@@ -1,0 +1,86 @@
+<body>
+    <div class="wrapper">
+        <h1>为确保您的预约成功，请提前48小时！</h1>
+        <div id="formDiv">
+            <form action="{:url('api/appointment/doAddAppointment')}" id='appointmentForm'>
+                <ul>
+                    <li class="clearBoth">
+                        <label for="">是否是会员：</label>
+                        <div class="fill-in-area member">
+                            <input type="radio" name="is_member" value="1"/><span>是</span>
+                            <input type="radio" name="is_member" checked value="0"/><span>否</span>
+                        </div>
+                    </li>
+                    <li class="clearBoth number">
+                        <label for="member_code">会员编号：</label>
+                        <div class="fill-in-area">
+                            <input type="text" name="member_code" placeholder="请输入会员编号"/>
+                        </div>
+                    </li>
+                    <li class="clearBoth">
+                        <label for="name">您的姓名：</label>
+                        <div class="fill-in-area">
+                            <input type="text" name="name" placeholder="请输入您的姓名" id="userName"/>
+                        </div>
+                    </li>
+                    <li class="clearBoth">
+                        <label for="phone">联系电话：</label>
+                        <div class="fill-in-area">
+                            <input type="text" id="phoneNumber" name="phone" placeholder="请输入您的联系电话" maxlength="11" />
+                        </div>
+                    </li>
+                    <li class="clearBoth">
+                        <label for="person_num">来店人数：</label>
+                        <div class="fill-in-area">
+                            <input type="text" name="person_num" placeholder="请输入来店人数"/>
+                        </div>
+                    </li>
+                    <li class="clearBoth">
+                        <label for="product_id">服务项目：</label>
+                        <div class="fill-in-area">
+                            <select name="product_id" id="">
+                                <option value="">请选择服务项目</option>
+                                {volist name="projects" id="vo"}
+                                <option value="{$vo.id}">{$vo.name}</option>
+                                {/volist}
+                            </select>
+                        </div>
+                    </li>
+                    <li class="clearBoth">
+                        <label for="store_id">预约门店：</label>
+                        <div class="fill-in-area">
+                            <select name="store_id" id="">
+                                <option value="">请选择预约门店</option>
+                                {volist name="stores" id="store"}
+                                <option value="{$key}">{$store}</option>
+                                {/volist}
+                            </select>
+                        </div>
+                    </li>
+                    <li class="clearBoth">
+                        <label for="appoint_date">预约日期：</label>
+                        <div class="fill-in-area">
+                            <input type="text" name="appoint_date" placeholder="请选择预约日期" id="time-of-appointment"/>
+                        </div>
+                    </li>
+                    <li class="clearBoth">
+                        <label for="appoint_time">到店时间：</label>
+                        <div class="fill-in-area time">
+                            <input type="text" name="appoint_time" placeholder="请选择到店时间" id="specific-time"/>
+                        </div>
+                    </li>
+                    <li class="clearBoth">
+                        <label for="remark">备注说明：</label>
+                        <div class="fill-in-area">
+                            <input type="text" name="remark" placeholder="您可填写备注"/>
+                        </div>
+                    </li>
+                    <li>
+                        <a href="javascript:;" class="submitBtn">提交</a>
+                    </li>
+                </ul>
+            </form>
+        </div>
+    </div>
+</body>
+
