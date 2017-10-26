@@ -11,7 +11,8 @@
 use think\Route;
 
 Route::get([
-    'verify' => 'admin/Index/verify'
+    'verify' => 'admin/Index/verify',
+    'aindex' => 'admin/Index/index'
 ]);
 
 Route::post([
