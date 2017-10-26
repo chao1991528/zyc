@@ -15,5 +15,5 @@
  * @return bool
  */
 function is_logined() {
-    return (session('?user.name') && session('?user.id')) ? true : false;
+    return (session('?admin.name') && session('?admin.id')) ? true : false;
 }

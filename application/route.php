@@ -11,14 +11,10 @@
 use think\Route;
 
 Route::get([
-    'index' => 'admin/Index/index',
-    'verify' => 'admin/Index/verify',
-    'userlist' => 'admin/User/ulist',
-    
-    'plist' => 'admin/Product/plist'
+    'verify' => 'admin/Index/verify'
 ]);
 
 Route::post([
-    'doLogin' => 'api/Index/doLogin',
-    'doLogout' => 'api/Index/doLogout',
+    'doLogin' => 'admin/Index/doLogin',
+    'doLogout' => 'admin/Index/doLogout'
 ]);

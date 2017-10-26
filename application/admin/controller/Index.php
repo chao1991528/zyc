@@ -4,19 +4,19 @@ use app\admin\common\AdminController;
 use think\captcha\Captcha;
 class Index extends AdminController
 {
-    protected $beforeActionList = [
-        'loginNeed' => ['except' => 'index,verify'],
-    ];
+//    protected $beforeActionList = [
+//        'loginNeed' => ['except' => 'index,verify'],
+//    ];
     
     //登录页面
-    public function index()
-    {
-        if(is_logined()){
-            $this->redirect('admin/Product/plist');
+    public function index() {
+        if (is_logined()) {
+            $this->redirect('admin/record/rlist');
+        } else {
+            return view('login');            
         }
-        return view('login');
     }
-    
+
     /**
      * 根据$page的不同生成要求的验证码
      * @param string $page 页面
@@ -50,16 +50,34 @@ class Index extends AdminController
     }
     
     /**
-     * 前台首页设置
+     * 登录操作处理
      */
-    public function indexSet() {
-        $setView = [
-            'css' => ['style'],
-            'js' => ['indexSet']
-        ];
-        $this->set_view($setView);
-        $setting = db('indexSetting')->where('id', 1)->find();
-        return view('indexSet', ['concept' => $setting['concept'], 'bg_img' => $setting['bg_img'], 'comment_url' => $setting['comment_url']]);
+    public function doLogin() {
+        if (request()->isPost()) {
+            $username = input('post.username');
+            $pwd = input('post.pwd');
+            $yzm = input('post.yzm');
+            if (!$username || !$pwd || !$yzm) {
+                return $this->resMes(300);
+            }
+            //验证码验证
+            $captcha = new Captcha();
+            $check = $captcha->check($yzm);
+            if (!$check) {
+                return $this->resMes(402);
+            }
+            //账号密码验证
+            $code = model('Admin')->login($username, $pwd);
+            return $this->resMes($code);
+        } else {
+            return $this->resMes(401);
+        }
     }
     
+    //退出登录
+    public function doLogout(){
+        session(null);
+        return $this->resMes(200);
+    }
+
 }

@@ -6,43 +6,11 @@
             <div class="title">
                 <span><img src="/static/images/leftico01.png" /></span>管理信息
             </div>
-            <ul class="menuson">		        
-                <li {eq name="Request.controller" value="Product"} class="active"{/eq}>
+            <ul class="menuson">		                       
+                <li {eq name="Request.controller" value="Record"} class="active"{/eq}>
                     <div class="header">
                         <cite></cite>
-                        <a href="{eq name='Request.action' value='plist'}javascript:;{else/}{:url('admin/product/plist')}{/eq}">产品管理</a>
-                        <i></i>
-                    </div>
-                </li>
-                
-                <li {eq name="Request.controller" value="Appointment"} class="active"{/eq}>
-                    <div class="header">
-                        <cite></cite>
-                        <a href="{eq name='Request.action' value='alist'}javascript:;{else/}{:url('admin/appointment/alist')}{/eq}">预约管理</a>
-                        <i></i>
-                    </div>
-                </li>
-                
-                <li {eq name="Request.controller" value="User"} class="active"{/eq}>
-                    <div class="header">
-                        <cite></cite>
-                        <a href="{eq name='Request.action' value='index'}javascript:;{else/}{:url('admin/user/index')}{/eq}">用户管理</a>
-                        <i></i>
-                    </div>                
-                </li>
-                
-                <li {eq name="Request.controller" value="Store"} class="active"{/eq}>
-                    <div class="header">
-                        <cite></cite>
-                        <a href="{eq name='Request.action' value='slist'}javascript:;{else/}{:url('admin/store/slist')}{/eq}">门店管理</a>
-                        <i></i>
-                    </div>                
-                </li>
-                
-                <li {eq name="Request.controller" value="Index"} class="active"{/eq}>
-                    <div class="header">
-                        <cite></cite>
-                        <a href="{eq name='Request.action' value='indexset'}javascript:;{else/}{:url('admin/index/indexSet')}{/eq}">前台首页管理</a>
+                        <a href="{eq name='Request.action' value='rlist'}javascript:;{else/}{:url('admin/Record/rlist')}{/eq}">肌肤测评管理</a>
                         <i></i>
                     </div>
 <!--                    <ul class="sub-menus" {eq name="Request.controller" value="Index"}style="display:block" {/else}class="hidden"{/eq}>
@@ -54,30 +22,13 @@
                         </li>
                     </ul>-->
                 </li>
-                                
                 
-                <li {eq name="Request.controller" value="Type"} class="active"{/eq}>
+                <li {eq name="Request.controller" value="Admin"} class="active"{/eq}>
                     <div class="header">
                         <cite></cite>
-                        <a href="{eq name='Request.action' value='tlist'}javascript:;{else/}{:url('admin/type/tlist')}{/eq}">产品类型管理</a>
+                        <a href="{eq name='Request.action' value='index'}javascript:;{else/}{:url('admin/admin/index')}{/eq}">用户管理</a>
                         <i></i>
-                    </div>
-                </li>
-                
-                <li {eq name="Request.controller" value="Memberlevel"} class="active"{/eq}>
-                    <div class="header">
-                        <cite></cite>
-                        <a href="{eq name='Request.action' value='mlist'}javascript:;{else/}{:url('admin/memberlevel/mlist')}{/eq}">会员等级管理</a>
-                        <i></i>
-                    </div>
-                </li>
-                
-                <li {eq name="Request.controller" value="Xilie"} class="active"{/eq}>
-                    <div class="header">
-                        <cite></cite>
-                        <a href="{eq name='Request.action' value='xlist'}javascript:;{else/}{:url('admin/xilie/xlist')}{/eq}">产品系列管理</a>
-                        <i></i>
-                    </div>
+                    </div>                
                 </li>
                                
             </ul>    

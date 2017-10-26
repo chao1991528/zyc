@@ -1,0 +1,27 @@
+<!-- 右边 start -->
+<div class="rightPage">
+    <div class="rightPagein">
+        <div class="place">
+            <span>位置：</span>
+            <ul class="placeul">
+                <li><a href="javascript:;">管理信息</a></li>
+                <li><a href="javascript:;">管理员账号管理</a></li>
+            </ul>
+        </div>	    
+        <div class="rightinfo">    
+            <form action="{:url('admin/admin/doSaveAdmin')}" id="userForm">
+                <div class="formbody">       
+                    <div class="formtitle"><b><span></span><span>账号管理</span></b></div>
+                    <ul class="forminfo">
+                        <li><label>用户名</label><input name="username" type="text" class="dfinput" value="{$user.username}" placeholder="用户名至少2个字符"/></li>
+                        <li><label>密码</label><input name="password" type="text" class="dfinput" placeholder="新密码至少6个字符,密码留空则不修改密码"/></li>
+                        <li style="margin-top: 25px;margin-bottom: 40px;">
+                            <input type="button" class="btn btn-primary submitBtn" value="保存"/>
+                        </li>
+                    </ul>
+                </div>
+            </form>           
+        </div>
+    </div>
+</div>
+<!-- 右边 end -->

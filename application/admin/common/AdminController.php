@@ -12,7 +12,7 @@ class AdminController extends Controller {
 
     protected function loginNeed() {
         if (!is_logined()) {
-            $this->redirect('/index.html');
+            $this->redirect('admin/index/index');
         }
     }
 
@@ -29,7 +29,6 @@ class AdminController extends Controller {
         }
         $js_str = '<script src="/static/js/jquery.min.js"></script>'.PHP_EOL;
         $js_str .= '<script src="/static/layui/layui.all.js"></script>'.PHP_EOL;
-//        $js_str .= '<script src="/static/layer/layer.js"></script>'.PHP_EOL;
         $js_str .= '<script src="/static/js/common.js"></script>'.PHP_EOL;
         if (isset($data['js']) && is_array($data['js'])) {
             foreach ($data['js'] as $js) {
@@ -40,6 +39,35 @@ class AdminController extends Controller {
             'css' => $css_str,
             'js' => $js_str
         ]);
+    }
+    
+    /**
+     * 
+     * @param int $code 状态码
+     * @param array $message  提示信息
+     * @return json
+     */
+    protected function resMes($code, $message = []) {
+        if (empty($message)) {
+            $message = config('return_code.' . $code);
+        }
+        return json(['code' => $code, 'message' => $message]);
+    }
+
+    /**
+     * 返回数据
+     * @param array $data 返回的数据
+     * @param string $message 数据返回的提示信息
+     * @return json
+     */
+    protected function resData($data, $message = '') {
+        if (empty($data)) {
+            return $this->resMes(201);
+        }
+        if (empty($message)) {
+            $message = config('return_code.200');
+        }
+        return json(['code' => 200, 'data' => $data, 'message' => $message]);
     }
 
 }
