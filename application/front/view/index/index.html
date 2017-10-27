@@ -1,0 +1,265 @@
+{__NOLAYOUT__}
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">		
+        <title>{$title}</title>
+        <meta name="keywords" content="{$keywords}">
+        <meta name="description" content="{$description}">
+        <!-- 手机站 -->
+        <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no" />
+        {$css}
+    </head>
+    <body>		
+        <div class="container">
+            <form action="{:url('front/index/doAdd')}" method="post" enctype="multipart/form-data" id="form">
+            <!-- 首页 start -->
+            <div class="indexPage">
+                <!-- 首页上 -->
+                <div class="indexTop">
+                    <img src="/static/front/images/index_top.jpg" alt="" />
+                </div>
+                <!-- 首页下 -->
+                <div class="indexBottom">
+                    <img src="/static/front/images/index_bottom.jpg" alt="" />
+                    <div class="row">
+                        <div class="col-md-12 col-sm-12 col-xs-12" style="padding:0;">		
+                            <div class="ycupload-mainbox">		        		
+                                <div style="min-height:1px;">
+                                    <div class="container">
+                                        <div class="row">
+                                            <div class="col-md-12 col-sm-12 col-xs-12" >
+                                                <div class="photoPage" ontouchstart="">
+                                                    <div class="cover-wrap">	
+                                                        <div class="cover-wrappage">
+                                                            <div id="clipArea"></div>
+                                                            <div class="sureBtn">
+                                                                <a id="closeBtn" href="javascript:;">取消</a>
+                                                                <a id="clipBtn" href="javascript:;">确定</a>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div id="view" title="请上传 300*390 的封面图片"><img src="/static/front/images/pic.png" alt="" /></div>
+                                                    <div style="height:10px;"></div>
+                                                    <div class="clickBtn">
+                                                        <img src="/static/front/images/btn.png" alt="" />
+                                                        <input type="file" id="file" name="image">
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div style="height:25px;"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- 首页 end -->
+
+            <!-- 第一页 start -->
+            <div class="floor floor0 floor1">
+                <div class="floorBg">
+                    <img src="/static/front/images/bg.jpg" alt="" />
+                </div>
+                <div class="floorDes">
+                    <div class="floorTop">
+                        <h1>Questions<br/>请选择您的情况</h1>
+                        <img src="/static/front/images/one.png" alt="" />
+                        <h2>请描述下你的皮肤特征</h2>
+                    </div>
+                    <div class="floorBottom">
+                        <ul>
+                            <li data-id="0" class="grey green" data-str="不干也不油"><img src="/static/front/images/one_1.png" alt="" /></li>
+                            <li data-id="1" class="grey" data-str="干燥，毛孔细"><img src="/static/front/images/one_2.png" alt="" /></li>
+                            <li data-id="2" class="grey" data-str="T区油，U区干"><img src="/static/front/images/one_3.png" alt="" /></li>
+                            <li data-id="3" class="grey" data-str="全脸泛油，易长痘"><img src="/static/front/images/one_4.png" alt="" /></li>
+                        </ul>
+                        <input type="hidden" name="skin_type" value="不干也不油" />
+                    </div>
+                    <div class="blank0"></div>
+                    <div class="next"><a href="javascript:;"><img src="/static/front/images/next.jpg" alt="" /></a></div>
+                </div>
+            </div>
+            <!-- 第一页 end -->
+
+            <!-- 第二页 start -->
+            <div class="floor floor0 floor2">
+                <div class="floorBg">
+                    <img src="/static/front/images/bg.jpg" alt="" />
+                </div>
+                <div class="floorDes">
+                    <div class="floorTop">
+                        <img src="/static/front/images/two.png" alt="" />
+                        <h2>你素颜时的肤色属于哪个？</h2>
+                    </div>
+                    <div class="floorBottom">
+                        <ul>
+                            <li data-id="0" class="grey green" data-str="白皙"><img src="/static/front/images/two_1.png" alt="" /></li>
+                            <li data-id="1" class="grey" data-str="粉嫩"><img src="/static/front/images/two_2.png" alt="" /></li>
+                            <li data-id="2" class="grey" data-str="暗黄"><img src="/static/front/images/two_3.png" alt="" /></li>
+                            <li data-id="3" class="grey" data-str="大麦色"><img src="/static/front/images/two_4.png" alt="" /></li>
+                        </ul>
+                        <input type="hidden" name="skin_color" value="白皙" />
+                    </div>
+                    <div class="blank0"></div>
+                    <div class="next"><a href="javascript:;"><img src="/static/front/images/next.jpg" alt="" /></a></div>
+                </div>
+            </div>
+            <!-- 第二页 end -->
+
+            <!-- 第三页 start -->
+            <div class="floor floor0 floor3">
+                <div class="floorBg">
+                    <img src="/static/front/images/bg.jpg" alt="" />
+                </div>
+                <div class="floorDes">
+                    <div class="floorTop">
+                        <img src="/static/front/images/three.png" alt="" />
+                        <h2>您的皮肤是否有过敏史？</h2>
+                    </div>
+                    <div class="floorBottom">
+                        <ul>
+                            <li data-id="0" class="grey green" data-str="从不"><img src="/static/front/images/three_1.png" alt="" /></li>
+                            <li data-id="1" class="grey" data-str="偶尔"><img src="/static/front/images/three_2.png" alt="" /></li>
+                            <li data-id="2" class="grey liCenter" data-str="易过敏"><img src="/static/front/images/three_3.png" alt="" /></li>
+                        </ul>
+                        <input type="hidden" name="is_guomin" value="从不" />
+                    </div>
+                    <div class="blank0"></div>
+                    <div class="next"><a href="javascript:;"><img src="/static/front/images/next.jpg" alt="" /></a></div>
+                </div>
+            </div>
+            <!-- 第三页 end -->
+
+            <!-- 第四页 start -->
+            <div class="floor floor4">
+                <div class="floorBg">
+                    <img src="/static/front/images/bg.jpg" alt="" />
+                </div>
+                <div class="floorDes">
+                    <div class="floorTop">
+                        <img src="/static/front/images/four.png" alt="" />
+                        <h2>您的脸部有什么皮肤问题？<em>（多选）</em></h2>
+                    </div>
+                    <div class="floorBottom">
+                        <ul class="ui-choose" multiple="multiple" id="uc_03">
+                            <li data-id="0" class="grey selected" data-str="黑头/毛孔"><img src="/static/front/images/four_1.png" alt="" /></li>
+                            <li data-id="1" class="grey" data-str="黑眼圈/眼袋/脂肪粒/皱纹"><img src="/static/front/images/four_2.png" alt="" /></li>
+                            <li data-id="2" class="grey" data-str="痘痘/痘印"><img src="/static/front/images/four_3.png" alt="" /></li>
+                            <li data-id="3" class="grey" data-str="干燥/紧绷"><img src="/static/front/images/four_4.png" alt="" /></li>
+                            <li data-id="4" class="grey" data-str="暗黄/斑点"><img src="/static/front/images/four_5.png" alt="" /></li>
+                            <li data-id="5" class="grey" data-str="皱纹"><img src="/static/front/images/four_6.png" alt="" /></li>
+                            <li data-id="6" class="grey liCenter" data-str="出油"><img src="/static/front/images/four_7.png" alt="" /></li>
+                        </ul>
+                        <input type="hidden" name="skin_problem" value="黑头/毛孔" />
+                    </div>
+                    <div class="blank0"></div>
+                    <div class="next"><a href="javascript:;"><img src="/static/front/images/next.jpg" alt="" /></a></div>
+                </div>
+            </div>
+            <!-- 第四页 end -->
+
+            <!-- 第五页 start -->
+            <div class="floor floor0 floor5">
+                <div class="floorBg">
+                    <img src="/static/front/images/bg.jpg" alt="" />
+                </div>
+                <div class="floorDes">
+                    <div class="floorTop">
+                        <img src="/static/front/images/five.png" alt="" />
+                        <h2>您最想解决的皮肤问题是？</h2>
+                    </div>
+                    <div class="floorBottom">
+                        <ul>
+                            <li data-id="0" class="grey green" data-str="敏感/脆弱"><img src="/static/front/images/five_1.png" alt="" /></li>
+                            <li data-id="1" class="grey" data-str="黑头粉刺/毛孔粗大/皮肤粗糙"><img src="/static/front/images/five_2.png" alt="" /></li>
+                            <li data-id="2" class="grey" data-str="痘痘"><img src="/static/front/images/five_3.png" alt="" /></li>
+                            <li data-id="3" class="grey" data-str="细纹/皮肤松弛"><img src="/static/front/images/five_4.png" alt="" /></li>
+                            <li data-id="4" class="grey" data-str="暗黄/色斑"><img src="/static/front/images/five_5.png" alt="" /></li>
+                            <li data-id="5" class="grey" data-str="黑眼圈/轻度眼袋/脂肪粒"><img src="/static/front/images/five_6.png" alt="" /></li>
+                            <li data-id="6" class="grey liCenter" data-str="严重眼袋/眼纹"><img src="/static/front/images/five_7.png" alt="" /></li>
+                        </ul>
+                        <input type="hidden" name="want_solve_problem" value="敏感/脆弱" />
+                    </div>
+                    <div class="blank0"></div>
+                    <div class="next"><a href="javascript:;"><img src="/static/front/images/next.jpg" alt="" /></a></div>
+                </div>
+            </div>
+            <!-- 第五页 end -->
+
+            <!-- 第六页 start -->
+            <div class="floor  floor0 floor6">
+                <div class="floorBg">
+                    <img src="/static/front/images/bg.jpg" alt="" />
+                </div>
+                <div class="floorDes">
+                    <div class="floorTop">
+                        <img src="/static/front/images/six.png" alt="" />
+                        <h2>您有没有对皮肤进行针对性护理？</h2>
+                    </div>
+                    <div class="floorBottom">
+                        <ul>
+                            <li data-id="0" class="grey green" data-str="从无，现在想要护理"><img src="/static/front/images/six_1.png" alt="" /></li>
+                            <li data-id="1" class="grey" data-str="有，效果不佳"><img src="/static/front/images/six_2.png" alt="" /></li>
+                            <li data-id="2" class="grey liCenter" data-str="有，皮肤逐渐改善"><img src="/static/front/images/six_3.png" alt="" /></li>
+                        </ul>
+                        <input type="hidden" name="is_huli" value="从无，现在想要护理" />
+                    </div>
+                    <div class="blank0"></div>
+                    <div class="next">
+                        <a href="javascript:;"><img src="/static/front/images/register.jpg" alt="" /></a>
+                    </div>
+                </div>
+            </div>
+            <!-- 第六页 end -->
+
+            <!-- 第七页 start -->
+            <div class="floor floor0 floor7">
+                <div class="floorFrame floorFrame1">
+                    <div class="floorBg">
+                        <img src="/static/front/images/lastbg_top.jpg" alt="" />
+                    </div>
+                    <div class="floorDes">
+                        <h3>敏感性皮肤</h3>
+                        <h4>
+                            <strong>表现特征：</strong>
+                            <span>
+                                皮肤水份油份不正常，干燥、粗糙，缺乏弹性，皮肤的PH值不正常，毛孔细小，脸部皮肤较薄，易敏感。面部肌肤暗沉、没有光泽，易破裂、起皮屑、长斑，不易上妆。
+                            </span>    
+                        </h4>
+                    </div>
+                </div>
+                <div class="floorFrame floorFrame2">
+                    <div class="floorBg">
+                        <img src="/static/front/images/lastbg_center.jpg" alt="" />
+                    </div>
+                    <div class="floorDes">						
+                        <h5>
+                            经常对皮肤进行保养；洗脸时水不可以过热过冷，要使用温和的洗面奶洗脸。早晨，可选用防晒霜，以避免日光伤害皮肤；晚上，可用营养型化妆水增加皮肤的水份。在饮食方面要少吃易引起过敏的食物。皮肤出现过敏后，要立即停止使用任何化妆品，对皮肤进行观察和保养护理。护肤品选择：应先进行适应性试验，在无反应的情况下方可使用。切忌使用劣质化妆品或同时使用多重化妆品，并注意不要频繁更换化妆品。
+                        </h5>
+                    </div>
+                </div>
+                <div class="floorFrame floorFrame3">
+                    <div class="floorBg">
+                        <img src="/static/front/images/lastbg_bottom.jpg" alt="" />
+                    </div>
+                    <div class="floorDes">						
+                        <h6>
+                            <span><img src="/static/front/images/code.jpg" alt="" /></span><br/>
+                            <div class="blank"></div>
+                            <b>长按添加微信好友<br/>获取针对性的护理方案</b>
+                        </h6>
+                    </div>
+                </div>
+            </div>
+            <!-- 第七页 end -->
+            </form>
+        </div>  
+    </body>
+    <script>
+        var subUrl = "{:url('front/index/doAdd')}";
+    </script>
+    {$js}
+</html>

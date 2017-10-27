@@ -3,7 +3,7 @@ $(document).ready(function () {
     dTable = $('#typeList').DataTable({
         "ajax": "/admin/record/doRlist",
         "language": {
-            url: '/api/appointment/localisation'
+            url: '/admin/record/localisation'
         },
         "order": [[ 1, "desc" ]],
         "columns": [

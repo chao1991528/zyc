@@ -8,7 +8,7 @@ $(function () {
                 function () {
                     $.post("/doLogout", function (data) {
                         if (data.code === 200) {
-                            window.location.href = "/index.html";
+                            window.location.href = "/aindex.html";
                         }
                     }
                     );
