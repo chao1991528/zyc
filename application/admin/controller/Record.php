@@ -41,7 +41,7 @@ class Record extends AdminController {
     }
     
     public function doExport(){
-        $name = '肌肤测试结果'. date("Y-m-d");
+        $name = '肌肤测试结果';
         $records = db('record')->field('skin_type,skin_color,is_guomin,skin_problem,want_solve_problem,is_huli,result_skin_type,result_skin_feature,result_protect_point,create_time')
                               ->order('id desc') 
                               ->select();
