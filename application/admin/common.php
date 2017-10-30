@@ -30,7 +30,7 @@ function excelExport($fileName = '', $headArr = [], $data = []) {
     $fileName = iconv("utf-8", "gb2312", $fileName); // 重命名表
     $objPHPExcel->setActiveSheetIndex(0); // 设置活动单指数到第一个表,所以Excel打开这是第一个表
     header('Content-Type: application/vnd.ms-excel');
-    header("Content-Disposition: attachment;filename='$fileName'");
+    header('Content-Disposition: attachment;filename="'.$fileName.'"');
     header('Cache-Control: max-age=0');
     $objWriter = \PHPExcel_IOFactory::createWriter($objPHPExcel, 'Excel5');
     $objWriter->save('php://output'); // 文件通过浏览器下载
