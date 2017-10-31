@@ -56,8 +56,8 @@ class Index extends FrontController
         }
         // 获取表单上传文件 例如上传了001.jpg
         $file = request()->file($inputName);
-        // 移动到框架应用根目录/public/uploads/ 目录下 ,上传文件不能超过4M
-        $info = $file->validate(['size' => 4 * 1024 * 1024, 'ext' => 'jpg,png,gif,bmp,jpeg'])->move(ROOT_PATH . 'public' . DS . 'uploads' . DS . $type);
+        // 移动到框架应用根目录/public/uploads/ 目录下 ,上传文件不能超过6M
+        $info = $file->validate(['size' => 6 * 1024 * 1024, 'ext' => 'jpg,png,gif,bmp,jpeg'])->move(ROOT_PATH . 'public' . DS . 'uploads' . DS . $type);
         if ($info) {
             //返回图片存储路径
             $uploadInfo = DS . 'uploads' . DS . $type . DS . $info->getSaveName();
@@ -68,7 +68,7 @@ class Index extends FrontController
         }
     }
     
-    //测试结果
+        //测试结果
     protected function testResult($data){
         if($data['is_guomin'] == '易过敏'){
             return [
