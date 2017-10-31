@@ -146,7 +146,9 @@ $(function () {
     });
     //第六页
     $(".floor6").on('click', '.next', function () {
-        loadings('<img src="/static/front/images/loading.gif" alt="加载" />');       
+        var self = $(this);
+        self.attr('disabled', true);
+//        loadings('<img src="/static/front/images/loading.gif" alt="加载" />');       
         var formData = new FormData($('#form')[0]);
         $.ajax({
             type: 'POST',
@@ -157,6 +159,7 @@ $(function () {
             async: false,
             success: function (data) {
                 if(data.code === 200){
+                    self.attr('disabled', false);
                     $('.floor7 h3').html(data.data.result_skin_type);
                     $('.floor7 h4 span').html(data.data.result_skin_feature);
                     $('.floor7 h5').html(data.data.result_protect_point);
@@ -169,9 +172,6 @@ $(function () {
                 }
             }
         });
-        
-        
-//        $("input[name='skin_type']").val($('.floorDes ul').eq(0).children('li .green').attr('data-str'));
     });
 });
 
