@@ -199,8 +199,8 @@ function writeText(h3write, swrite, h5write) {
         $(".floorFrame5").css('height','30px');
     }
     // loadings('<img src="/static/front/images/loading.gif" alt="加载" />');
-    setTimeout(function(){          
-        $(".floor6").hide();
-        $(".floor7").show();
-    },1500) ;   
+          
+    $(".floor6").hide();
+    $(".floor7").show();
+     
 }
