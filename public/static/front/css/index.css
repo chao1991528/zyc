@@ -3,7 +3,7 @@
 .blank{height:5px;clear:both;}
 .blank1{height:10px;clear:both;}
 /*首页*/
-.indexPage{display:none;}
+.indexPage{display:block;}
 .indexTop img{width:100%;}
 .indexBottom{position:relative;}
 .indexBottom img{width:100%;}
@@ -83,7 +83,7 @@
 .floor6 .liCenter img{width:40%;}
 
 /*第七页*/
-.floor7{display:block;}
+.floor7{display:none;}
 .floor7 .floorDes{margin:5% 5% 0;width:90%;}
 .floor7 .floorDes h3{color:red;font-size:0.3rem;padding:1px 0;}
 .floor7 .floorDes h4{text-align:justify;font-size:0.23rem;line-height:0.33rem;margin:5px 6%;width:88%;color:#666;}
