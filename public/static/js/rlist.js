@@ -30,20 +30,35 @@ $(document).ready(function () {
             {"data": "skin_problem", "sClass": "text-center"},
             {"data": "want_solve_problem", "sClass": "text-center"},
             {"data": "is_huli", "sClass": "text-center"},
+            {"data": "result_skin_type", "sClass": "text-center"},
+            {"data": "result_skin_feature", "sClass": "text-center"},
+            {"data": "result_protect_point", "sClass": "text-center"},
             {"data": "create_time", "sClass": "text-center"}
         ],
         "aoColumnDefs": [
-            { "sWidth": "3%", "aTargets": [0] }
-//            {  
-//                "targets": 10,
-//                "searchable": false,
-//                "sClass": "text-center",               
-//                "sWidth": '10%',
-//                "data":"id",
-//                "render": function(data, type, row) { // 返回自定义内容
-//                    return "<a href='javascript:;' class='rowEdit' data-id=" + data + ">编辑</a>";
-//                }
-//            }
+            { "sWidth": "3%", "aTargets": [0] },
+            { "sWidth": "7%", "aTargets": [6,7,8] },
+            { "sWidth": "8%", "aTargets": [9] },
+            { 
+                "sWidth": "10%",
+                "aTargets": [10], 
+                "render":function(data, type, row){
+                    var str = data.length>25?(data.substr(0, 25)+'...'):data.substr(0, 25);
+                    return '<span title="'+ data +'"' + '>'+ str +'</span>';
+                }                    
+            },
+            {
+                "sWidth": "10%", 
+                "aTargets": [11], 
+                "render":function(data, type, row){
+                    var str = data.length>25?(data.substr(0, 25)+'...'):data.substr(0, 25);
+                    return '<span title="'+ data +'"' + '>'+ str +'</span>';
+                }
+            },
+            {
+                "sWidth": "6%", 
+                "aTargets": [12]
+            }
         ]  
     });
     //每300秒重新加载表数据(分页留存) 
@@ -109,4 +124,19 @@ $(document).ready(function () {
         });
     });
     
+    //导出excel
+    $('.export').click(function(){
+        layer.confirm(
+            '确定导出数据吗？',
+            {
+                btn: ['确定', '取消'] //按钮
+            },
+            function () {
+                var index = layer.open();
+                layer.close(index);
+//                layer.close();
+                window.location.href = exportUrl;                
+            }
+        );
+    });
 });

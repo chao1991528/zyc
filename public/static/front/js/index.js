@@ -150,9 +150,9 @@ $(function () {
             async: false,
             success: function (data) {
                 if(data.code === 200){
-                    $('.floor7 h3').html(data.data.skin_type);
-                    $('.floor7 h4 span').html(data.data.feature);
-                    $('.floor7 h5').html(data.data.protect_point);
+                    $('.floor7 h3').html(data.data.result_skin_type);
+                    $('.floor7 h4 span').html(data.data.result_skin_feature);
+                    $('.floor7 h5').html(data.data.result_protect_point);
                     setTimeout(function () {
                         $(".floor6").hide();
                         $(".floor7").show();

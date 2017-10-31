@@ -14,7 +14,12 @@ class Index extends FrontController
             'js'  => ['iscroll-zoom','hammer','lrz.all.bundle', 'jquery.photoClip.min', 'ui-choose', 'index']
         ];
         $this->set_view($setView);
-        return view('index');            
+        
+        //微信二维码图片随机
+        $img_arr = config('code_img');
+        $index = array_rand($img_arr);
+        $code_img = $img_arr[$index];
+        return view('index', ['code_img' => $code_img]);
     }
     
     /**
@@ -35,9 +40,9 @@ class Index extends FrontController
             if (true !== $result) {
                 return $this->resMes('444', $result);
             }
-            
-            $res = model('Record')->saveData($data);
             $testResult = $this->testResult($data);
+            $data = array_merge($data,$testResult);
+            $res = model('Record')->saveData($data);            
             return $res ? $this->resData($testResult) : $this->resMes(400);
         } else {
             return $this->resMes(401);
@@ -99,7 +104,7 @@ class Index extends FrontController
                     break;
             }            
         }
-        return ['skin_type' => $skin_type, 'feature' => $feature, 'protect_point' => $protect_point];
+        return ['result_skin_type' => $skin_type, 'result_skin_feature' => $feature, 'result_protect_point' => $protect_point];
     }
 
 }
