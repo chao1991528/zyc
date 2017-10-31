@@ -8,7 +8,7 @@ Source Database       : pifu
 
 Target Server Type    : MYSQL
 Target Server Version : 100113
-File Encoding         : 65001
+File Encoding         : 65001pp
 
 Date: 2017-10-27 17:43:59
 */

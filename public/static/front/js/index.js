@@ -114,6 +114,13 @@ $(function () {
         }
     });
 
+    /*获取高度*/
+    var $height = $('.floor7 .floorDeslast h5').text().length;   
+    if($height<100){
+        $(".floorFrame5").css('height','90px');
+    }else if($height<130){
+        $(".floorFrame5").css('height','30px');
+    }
 
     /**********点击下一步**********/
     //第一页
