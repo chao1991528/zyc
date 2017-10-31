@@ -152,13 +152,6 @@ $(function () {
             success: function (data) {
                 if(data.code === 200){
                     self.attr('disabled', false);
-                    $('.floor7 h3').html(data.data.result_skin_type);
-                    $('.floor7 h4 span').html(data.data.result_skin_feature);
-                    $('.floor7 h5').html(data.data.result_protect_point);
-                    setTimeout(function () {
-                        $(".floor6").hide();
-                        $(".floor7").show();
-                    }, 2000);
                 }else{
                     layer(data.message);
                 }
@@ -171,7 +164,7 @@ function tijiaoBtn(){
     //点击选择
     var dataStr= $('.floor1').find('.green').attr('data-str');
     var dataStr1= $('.floor3').find('.green').attr('data-str');
-    console.log(dataStr, dataStr1);
+    //console.log(dataStr, dataStr1);
     if(dataStr1 == '易过敏') {
         writeText('敏感性皮肤', '皮肤较敏感，皮脂膜薄，皮肤自身保护能力较弱，皮肤易出现红、肿、刺、痒、痛和脱皮、脱水现象。', '经常对皮肤进行保养；洗脸时水不可以过热过冷，要使用温和的洗面奶洗脸。早晨，可选用防晒霜，以避免日光伤害皮肤；晚上，可用营养型化妆水增加皮肤的水份。在饮食方面要少吃易引起过敏的食物。皮肤出现过敏后，要立即停止使用任何化妆品，对皮肤进行观察和保养护理。护肤品选择：应先进行适应性试验，在无反应的情况下方可使用。切忌使用劣质化妆品或同时使用多重化妆品，并注意不要频繁更换化妆品。');
     } else {
