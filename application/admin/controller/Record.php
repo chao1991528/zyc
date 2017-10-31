@@ -41,8 +41,19 @@ class Record extends AdminController {
     }
     
     public function doExport(){
+        $start_date = input('get.start_date');
+        $end_date = input('get.end_date');
+        $where = "";
+        if($start_date && $end_date){
+            $where = "create_time>='".$start_date."' and create_time<='".$end_date." 23:59:59'";
+        }elseif ($start_date) {
+            $where = "create_time>='".$start_date."'";
+        } elseif($end_date) {
+            $where = "create_time<='".$end_date." 23:59:59'";
+        }
         $name = '肌肤测试结果';
         $records = db('record')->field('skin_type,skin_color,is_guomin,skin_problem,want_solve_problem,is_huli,result_skin_type,result_skin_feature,result_protect_point,create_time')
+                              ->where($where)
                               ->order('id desc') 
                               ->select();
         $header = ['皮肤类型', '皮肤颜色', '是否过敏', '皮肤问题', '最想解决的问题', '是否护理过皮肤', '测试结果肌肤属性', '测试结果表现特征', '测试结果保养重点', '创建时间'];

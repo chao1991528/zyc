@@ -1,5 +1,18 @@
+$.fn.dataTable.ext.search.push(
+    function( settings, data, dataIndex ) {
+        var min = $('#start_date').val();
+        var max = $('#end_date').val();
+        var time = data[12]; // use data for the age column
+ 
+        if ( ( min<=time && max.length==0 ) || ( max+' 23:59:59'>=time && min.length===0 ) || ( (min <= time) && (time <= max+' 23:59:59') ) ){
+            console.log(min + max);
+            return true;
+        }
+        return false;
+    }
+);
 $(document).ready(function () {
-    var upload = layui.upload;
+    var laydate = layui.laydate;
     dTable = $('#typeList').DataTable({
         "ajax": "/admin/record/doRlist",
         "language": {
@@ -60,72 +73,88 @@ $(document).ready(function () {
                 "aTargets": [12]
             }
         ]  
-    });
+    });   
+    
     //每300秒重新加载表数据(分页留存) 
     setInterval( function () {
         dTable.ajax.reload( null, false ); // 刷新表格数据，分页信息不会重置
     }, 300000 );
     
-    //添加页面点击添加按钮
-    $('.submitBtn').click(function(){
-        var isEdit = $(".forminfo input[name='id']").val().length;
-        var message;
-        if(isEdit){
-            url = editUrl;
-            message = '修改预约成功！';
-        }else{
-            url = addUrl;
-            message = '添加预约成功！';            
+    laydate.render({
+        elem: '#start_date', //指定元素
+        done: function(value, date, endDate){
+            $('#start_date').val(value);
+            dTable.draw();
         }
-        var url = isEdit ? editUrl : addUrl;
-        $.post(url, $('#form').serialize(), function (data) {
-            if (data.code === 200) {
-                layer.close(layer.index);
-                $('#form').addClass('hidden');
-                layer.msg(message, {time: 2000});
-                isEdit ? dTable.ajax.reload(null, false) : dTable.ajax.reload();
-                $('#form')[0].reset();
-            } else {
-                layer.msg(data.message, {time: 1500});
-            }
-        });
+    });
+    laydate.render({
+        elem: '#end_date', //指定元素
+        done: function(value, date, endDate){
+            $('#end_date').val(value);
+            dTable.draw();
+        }
     });
     
-    //点击编辑按钮
-    $('#typeList').on('click', '.rowEdit', function(){
-        var id = $(this).attr('data-id');
-        $('#form').removeClass('hidden');
-        $('.submitBtn').val('保存');
-        $('.formtitle span').eq(0).html('编辑');        
-        layer.open({
-            type: 1,
-            area: '700px',
-            shadeClose: false,
-            content: $('#form'),
-            success: function (layero, index) {
-                $(".forminfo input[name='id']").val(id);
-                $.post(viewUrl, {id:id},function (data) {            
-                    if (data.code === 200) { 
-                        $("input:radio[name='status']").each(function (){
-                            $(this).val()==data.data.status?$(this).attr("checked","checked"):null;
-                        });
-                    } else {
-                        layer.msg(data.message, {time: 1500});
-                    }
-                });
-            },
-            cancel: function (index, layero) {
-                $('#form')[0].reset();
-                $('#uploaded').removeAttr('src');
-                $('#form').addClass('hidden');
-                layer.close(index);
-                return false;
-            }
-        });
-    });
+    //添加页面点击添加按钮
+//    $('.submitBtn').click(function(){
+//        var isEdit = $(".forminfo input[name='id']").val().length;
+//        var message;
+//        if(isEdit){
+//            url = editUrl;
+//            message = '修改预约成功！';
+//        }else{
+//            url = addUrl;
+//            message = '添加预约成功！';            
+//        }
+//        var url = isEdit ? editUrl : addUrl;
+//        $.post(url, $('#form').serialize(), function (data) {
+//            if (data.code === 200) {
+//                layer.close(layer.index);
+//                $('#form').addClass('hidden');
+//                layer.msg(message, {time: 2000});
+//                isEdit ? dTable.ajax.reload(null, false) : dTable.ajax.reload();
+//                $('#form')[0].reset();
+//            } else {
+//                layer.msg(data.message, {time: 1500});
+//            }
+//        });
+//    });
+//    
+//    //点击编辑按钮
+//    $('#typeList').on('click', '.rowEdit', function(){
+//        var id = $(this).attr('data-id');
+//        $('#form').removeClass('hidden');
+//        $('.submitBtn').val('保存');
+//        $('.formtitle span').eq(0).html('编辑');        
+//        layer.open({
+//            type: 1,
+//            area: '700px',
+//            shadeClose: false,
+//            content: $('#form'),
+//            success: function (layero, index) {
+//                $(".forminfo input[name='id']").val(id);
+//                $.post(viewUrl, {id:id},function (data) {            
+//                    if (data.code === 200) { 
+//                        $("input:radio[name='status']").each(function (){
+//                            $(this).val()==data.data.status?$(this).attr("checked","checked"):null;
+//                        });
+//                    } else {
+//                        layer.msg(data.message, {time: 1500});
+//                    }
+//                });
+//            },
+//            cancel: function (index, layero) {
+//                $('#form')[0].reset();
+//                $('#uploaded').removeAttr('src');
+//                $('#form').addClass('hidden');
+//                layer.close(index);
+//                return false;
+//            }
+//        });
+//    });
     
     //导出excel
-    $('.export').click(function(){
+    $('.exportData').click(function(){
         layer.confirm(
             '确定导出数据吗？',
             {
@@ -134,8 +163,9 @@ $(document).ready(function () {
             function () {
                 var index = layer.open();
                 layer.close(index);
-//                layer.close();
-                window.location.href = exportUrl;                
+                var start_date = $('#start_date').val();
+                var end_date = $('#end_date').val();
+                window.location.href = exportUrl+'?start_date=' + start_date + '&end_date=' + end_date;                
             }
         );
     });
