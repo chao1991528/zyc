@@ -138,6 +138,7 @@ $(function () {
     });
     //第六页
     $(".floor6").on('click', '.next', function () {
+        tijiaoBtn();
         var self = $(this);
         self.attr('disabled', true);
 //        loadings('<img src="/static/front/images/loading.gif" alt="加载" />');       
