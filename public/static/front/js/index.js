@@ -149,7 +149,7 @@ $(function () {
             url: subUrl, 
             processData: false,
             contentType: false,
-            async: false,
+            async: true,
             success: function (data) {
                 if(data.code === 200){
                     self.attr('disabled', false);
