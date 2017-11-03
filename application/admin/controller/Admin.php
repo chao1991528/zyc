@@ -21,6 +21,21 @@ class Admin extends AdminController {
         $user = db('admin')->where('id', 1)->find();
         return view('index', ['user' => $user]);
     }
+    
+    //管理员列表
+    public function alist(){
+        $setView = [
+            'css' => ['style', 'bootstrap.min', 'dataTables.bootstrap'],
+            'js'  => ['jquery.dataTables.min','dataTables.bootstrap','alist']
+        ];
+        $this->set_view($setView);
+        return view('alist');
+    }
+    
+    public function doAdminList(){
+        $data = \app\admin\model\Admin::all();
+        return $this->resData($data);
+    }
 
     //修改管理员信息
     public function doSaveAdmin() {

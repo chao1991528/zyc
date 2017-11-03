@@ -26,7 +26,15 @@
                 <li {eq name="Request.controller" value="Admin"} class="active"{/eq}>
                     <div class="header">
                         <cite></cite>
-                        <a href="{eq name='Request.action' value='index'}javascript:;{else/}{:url('admin/admin/index')}{/eq}">用户管理</a>
+                        <a href="{eq name='Request.action' value='alist'}javascript:;{else/}{:url('admin/admin/alist')}{/eq}">用户管理</a>
+                        <i></i>
+                    </div>                
+                </li>
+                
+                <li {eq name="Request.controller" value="AuthRule"} class="active"{/eq}>
+                    <div class="header">
+                        <cite></cite>
+                        <a href="{eq name='Request.action' value='ruleList'}javascript:;{else/}{:url('admin/AuthRule/ruleList')}{/eq}">规则管理</a>
                         <i></i>
                     </div>                
                 </li>

@@ -1,7 +1,7 @@
 <?php
 
 return [
-    //not in use
+    //返回状态码
     'return_code' => [
         '200' => '成功',
         '201' => '成功但数据为空',
@@ -14,14 +14,13 @@ return [
         '402' => '验证码错误',
         '403' => '账号或密码错误'
     ],
-    // +----------------------------------------------------------------------
-    // | oss设置K
-    // +----------------------------------------------------------------------
-    'oss' => [
-        'accessKeyId' => 'LTAIUglRn21q4Lxa', //您从OSS获得的AccessKeyId
-        'accessKeySecret' => 'KxgqkouHZjj5CK75fpNcLxlm42jt5z', //您从OSS获得的AccessKeySecret
-        'endpoint' => 'http://vpc100-oss-cn-shanghai.aliyuncs.com', //您选定的OSS数据中心访问域名(不包含bucket)
-        'bucket' => 'bang-app', //空间名称
-    ],
-    'md5_key' => '!mfaif@$fsdf'
+    //auth权限验证
+    'auth' => [
+        'auth_on'           => true, // 权限开关
+        'auth_type'         => 2, // 认证方式，1为实时认证；2为登录认证。
+        'auth_group'        => 'auth_group', // 用户组数据表名
+        'auth_group_access' => 'auth_group_access', // 用户-用户组关系表
+        'auth_rule'         => 'auth_rule', // 权限规则表
+        'auth_user'         => 'admin', // 管理员表
+    ]
 ];

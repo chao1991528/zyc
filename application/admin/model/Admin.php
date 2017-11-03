@@ -9,6 +9,12 @@ use think\Request;
  * @author zyc
  */
 class Admin extends Model {
+    
+    public function getStatusAttr($value)
+    {
+        $status = [0=>'禁用',1=>'正常'];
+        return $status[$value];
+    }
 
     public function login($username, $pwd) {
         
