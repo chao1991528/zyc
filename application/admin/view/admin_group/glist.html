@@ -1,0 +1,66 @@
+<!-- 右边 start -->
+<div class="rightPage">
+    <div class="rightPagein">
+        <div class="place">
+            <span>位置：</span>
+            <ul class="placeul">
+                <li><a href="javascript:;">管理信息</a></li>
+                <li><a href="javascript:;">管理员组管理</a></li>
+            </ul>
+        </div>	    
+        <div class="rightinfo">    
+            <div class="tools">			    
+                <ul class="toolbar">
+                    <li class="click"><span><img src="/static/images/t01.png" /></span>添加</li>
+                    <li><span><img src="/static/images/t03.png" /></span>删除</li>
+                </ul>	
+            </div>	
+            <table id="typeList" class="table table-striped table-bordered" width="100%" cellspacing="0">
+                <thead>
+                    <tr>
+                        <th style=""><input type="checkbox" class="checkall" /></th>
+                        <th>组名</th>
+                        <th class="text-center">操作</th>
+                    </tr>
+                </thead>
+            </table>            
+        </div>
+    </div>
+</div>
+<form id="form" class="hidden">
+    <div class="formbody">       
+        <div class="formtitle"><b><span></span><span>管理员组</span></b></div>
+        <input type="hidden" name="pid" value="0"/>
+        <ul class="forminfo">
+            <input type="hidden" name="id"/>
+            <li>
+                <label>上级<b>*</b></label>
+                <div class="usercity">
+                    <select class="select2" name="pid" style="width: 167px;">
+                        <option value="0">请选择上级</option>
+                        {volist name='groups' id='vo'}                                 
+                        <option value="{$key}">{$vo}</option>       
+                        {/volist}
+                    </select>
+                </div>
+            </li>
+            
+            <li>
+                <label>组名<b>*</b></label>                
+                <input name="title" type="text" class="dfinput" placeholder="组名至少2个但不能超过20个字符"/><b></b>
+            </li>            
+                       
+            <li style="margin-top: 25px;margin-bottom: 40px;">
+                <input type="button" class="btn btn-primary submitBtn" value=""/>
+            </li>
+        </ul>
+    </div>
+</form>
+ <!--右边 end--> 
+<script>
+    var delUrl = "{:url('admin/AdminGroup/doDelAdminGroup')}";
+    var editUrl = "{:url('admin/AdminGroup/doEditAdminGroup')}";
+    var addUrl = "{:url('admin/AdminGroup/doAddAdminGroup')}";
+    var viewUrl = "{:url('admin/AdminGroup/viewAdminGroup')}";
+    var dTable;
+</script>

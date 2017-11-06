@@ -16,9 +16,16 @@ class Admin extends Model {
         return $status[$value];
     }
 
-    public function login($username, $pwd) {
-        
-        $admin = db('admin')->where('username', $username)->find();
+    public function login($username, $pwd) {        
+        $admin = db('admin')->alias('a')
+                            ->field('a.id,a.realname,a.username,a.status,a.password,c.title,c.id as gid')
+                            ->join('__AUTH_GROUP_ACCESS__ b', 'a.id=b.uid', 'left')
+                            ->join('__AUTH_GROUP__ c', 'b.group_id=c.id','left')
+                            ->where('username', $username)
+                            ->find();
+        if(!$admin['status']){
+            return 405;
+        }
         if (!$admin || $admin['password'] != md5($pwd)) {
             return 403;
         }
@@ -26,9 +33,11 @@ class Admin extends Model {
         $ip = $request->ip();
         $res = db('admin')->where('username', $username)->update(['last_login_ip' => $ip, 'last_login_time' => time()]);
         if($res){
-            session('admin.name', $admin['username']);
-            session('admin.id', $admin['id']);
-            session('admin.real', $admin['realname']);
+            session('name', $admin['username']);
+            session('id', $admin['id']);
+            session('real', $admin['realname']);
+            session('gid', $admin['gid']);
+            session('groupname', $admin['title']);
             define('UID', $admin['id']);
             return 200;
         } 

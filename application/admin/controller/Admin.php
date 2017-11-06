@@ -29,12 +29,26 @@ class Admin extends AdminController {
             'js'  => ['jquery.dataTables.min','dataTables.bootstrap','alist']
         ];
         $this->set_view($setView);
-        return view('alist');
+        
+        //获取组信息
+        $ids = [];
+        $groups = db('AuthGroup')->where('id', 'in', $ids)->column('id, title');
+        
+        return view('alist', ['groups' => $groups]);
     }
     
     public function doAdminList(){
         $data = \app\admin\model\Admin::all();
         return $this->resData($data);
+    }
+    
+    //查看管理员信息
+    public function viewAdmin(){
+        $id = input('post.id');
+        if(!$id){
+            return $this->resMes(300);
+        }
+//        $data = $
     }
 
     //修改管理员信息

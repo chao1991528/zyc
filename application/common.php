@@ -11,9 +11,24 @@
 // +----------------------------------------------------------------------
 // 应用公共文件
 /**
- * 是否登录
- * @return bool
+ * 获取子类id
+ * @staticvar array $ids
+* @param string $table 表名 
+ * @param type $id  要获取子类的分类id
+ * @param type $include_self 是否包含自己 
+ * @return array
  */
-function is_logined() {
-    return (session('?admin.name') && session('?admin.id')) ? true : false;
+function getSubIds($table, $id = 0, $include_self = false) {
+    static $ids = [];   
+    $data = db($table)->field('id,pid')->select();
+    foreach ($data as $v) {
+        if ($v['pid'] == $id) {
+            $ids[] = $v['id'];
+            getSubIds($table, $v['id']);
+        }
+    }
+    if ($include_self) {
+        $ids[] = $id;
+    }
+    return $ids;
 }

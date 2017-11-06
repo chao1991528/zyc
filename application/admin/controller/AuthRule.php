@@ -69,32 +69,10 @@ class AuthRule extends AdminController {
         if(!$id){
             return $this->resMes(300);
         } 
-        $ids = $this->getSubIds($id, true);
+        $ids = getSubIds('AuthRule',$id, true);
         $res = db('authRule')->where('id','in',$ids)->delete();
         //还有日志操作undo
         return $res?$this->resMes(200):$this->resMes(400);
-    }
-    
-    /**
-     * 获取（可以包含自己）子权限
-     * @staticvar array $ids
-     * @param type $id  权限id
-     * @param type $include_self 是否包含自己 
-     * @return array
-     */
-    protected function getSubIds($id = 0, $include_self = false) {
-        static $ids = [];
-        $rules = db('authRule')->field('id,pid,title')->select();
-        foreach ($rules as $v) {
-            if ($v['pid'] == $id) {
-                $ids[] = $v['id'];
-                $this->getSubIds($v['id']);
-            }
-        }
-        if($include_self){
-            $ids[] = $id; 
-        }
-        return $ids;
-    }
+    }   
 
 }

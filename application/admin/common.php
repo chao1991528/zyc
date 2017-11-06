@@ -1,6 +1,14 @@
 <?php
 
 /**
+ * 是否登录
+ * @return bool
+ */
+function is_logined() {
+    return (session('?name') && session('?id')) ? true : false;
+}
+
+/**
  * excel表格导出
  * @param string $fileName 文件名称
  * @param array $headArr 表头名称
