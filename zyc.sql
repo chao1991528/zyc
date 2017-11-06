@@ -10,7 +10,7 @@ Target Server Type    : MYSQL
 Target Server Version : 100113
 File Encoding         : 65001
 
-Date: 2017-11-03 18:59:12
+Date: 2017-11-06 18:46:52
 */
 
 SET FOREIGN_KEY_CHECKS=0;
@@ -36,7 +36,7 @@ CREATE TABLE `z_admin` (
 -- ----------------------------
 -- Records of z_admin
 -- ----------------------------
-INSERT INTO `z_admin` VALUES ('1', 'root', 'e10adc3949ba59abbe56e057f20f883e', 'zyc', '392318709', '0', '1', '127.0.0.1', '1509589869');
+INSERT INTO `z_admin` VALUES ('1', 'root', 'e10adc3949ba59abbe56e057f20f883e', 'zyc', '392318709', '0', '1', '127.0.0.1', '1509963023');
 
 -- ----------------------------
 -- Table structure for z_auth_group
@@ -44,15 +44,21 @@ INSERT INTO `z_admin` VALUES ('1', 'root', 'e10adc3949ba59abbe56e057f20f883e', '
 DROP TABLE IF EXISTS `z_auth_group`;
 CREATE TABLE `z_auth_group` (
   `id` mediumint(8) unsigned NOT NULL AUTO_INCREMENT,
-  `title` char(100) NOT NULL DEFAULT '',
+  `title` char(20) NOT NULL DEFAULT '',
   `status` tinyint(1) NOT NULL DEFAULT '1',
   `rules` char(80) NOT NULL DEFAULT '',
+  `pid` mediumint(8) unsigned NOT NULL DEFAULT '0' COMMENT '父id',
   PRIMARY KEY (`id`)
-) ENGINE=MyISAM DEFAULT CHARSET=utf8;
+) ENGINE=MyISAM AUTO_INCREMENT=7 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Records of z_auth_group
 -- ----------------------------
+INSERT INTO `z_auth_group` VALUES ('1', '超级管理员', '1', '', '0');
+INSERT INTO `z_auth_group` VALUES ('2', '总经理', '1', '', '1');
+INSERT INTO `z_auth_group` VALUES ('3', '经理', '1', '', '2');
+INSERT INTO `z_auth_group` VALUES ('4', '员工', '1', '', '3');
+INSERT INTO `z_auth_group` VALUES ('5', '外协', '1', '', '4');
 
 -- ----------------------------
 -- Table structure for z_auth_group_access
@@ -69,6 +75,7 @@ CREATE TABLE `z_auth_group_access` (
 -- ----------------------------
 -- Records of z_auth_group_access
 -- ----------------------------
+INSERT INTO `z_auth_group_access` VALUES ('1', '1');
 
 -- ----------------------------
 -- Table structure for z_auth_rule
