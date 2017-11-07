@@ -19,16 +19,12 @@
  * @return array
  */
 function getSubIds($table, $id = 0, $include_self = false) {
-    echo $id.'##';
-    static $ids = [];   
+    $ids = [];   
     $data = db($table)->field('id,pid')->select();
-    var_dump($data);
     foreach ($data as $v) {
         if ($v['pid'] == $id) {
             $ids[] = $v['id'];
-            echo $id.'*****';
-            var_dump($ids);
-            getSubIds($table, $v['id']);
+            $ids = array_merge($ids, getSubIds($table, $v['id']));
         }
     }
     if ($include_self) {

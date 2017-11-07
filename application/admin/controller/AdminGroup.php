@@ -80,35 +80,4 @@ class AdminGroup extends AdminController {
         $res = db('AuthGroup')->where('id',  $id)->delete();
         return $res ? $this->resMes(200) : $this->resMes(400);
     }
-    
-    protected function getSubIds($id = 0, $include_self = false) {
-        static $ids = [];
-        $rules = db('authRule')->field('id,pid')->select();
-        foreach ($rules as $v) {
-            if ($v['pid'] == $id) {
-                $ids[] = $v['id'];
-                $this->getSubIds($v['id']);
-            }
-        }
-        if($include_self){
-            $ids[] = $id; 
-        }
-        return $ids;
-    }
-    
-    protected function getSubIds2($id = 0, $include_self = false) {
-        static $ids = [];
-        $rules = db('authRule')->field('id,pid')->select();
-        foreach ($rules as $v) {
-            if ($v['pid'] == $id) {
-                $ids[] = $v['id'];
-                $this->getSubIds($v['id']);
-            }
-        }
-        if($include_self){
-            $ids[] = $id; 
-        }
-        return $ids;
-    }
-
 }
