@@ -10,7 +10,7 @@ Target Server Type    : MYSQL
 Target Server Version : 100113
 File Encoding         : 65001
 
-Date: 2017-11-06 18:46:52
+Date: 2017-11-07 18:49:40
 */
 
 SET FOREIGN_KEY_CHECKS=0;
@@ -21,22 +21,33 @@ SET FOREIGN_KEY_CHECKS=0;
 DROP TABLE IF EXISTS `z_admin`;
 CREATE TABLE `z_admin` (
   `id` int(4) unsigned NOT NULL AUTO_INCREMENT,
-  `username` varchar(12) NOT NULL DEFAULT '' COMMENT '用户名',
-  `password` char(40) NOT NULL,
-  `realname` varchar(8) NOT NULL COMMENT '真实姓名',
+  `username` varchar(20) NOT NULL DEFAULT '' COMMENT '用户名',
+  `password` varchar(40) NOT NULL,
+  `realname` varchar(20) NOT NULL COMMENT '真实姓名',
   `email` varchar(256) NOT NULL COMMENT '邮箱',
   `rank` tinyint(3) unsigned NOT NULL,
+  `pid` int(4) unsigned NOT NULL DEFAULT '0' COMMENT '父亲id',
   `status` tinyint(3) unsigned NOT NULL DEFAULT '1' COMMENT '用户状态，0禁用，1正常',
-  `last_login_ip` varchar(16) DEFAULT NULL,
-  `last_login_time` int(10) unsigned DEFAULT NULL,
+  `last_login_ip` varchar(16) NOT NULL DEFAULT '' COMMENT '最后登录ip',
+  `last_login_time` datetime NOT NULL DEFAULT '0000-00-00 00:00:00' COMMENT '最后登录时间',
   PRIMARY KEY (`id`),
   UNIQUE KEY `username_UNIQUE` (`username`)
-) ENGINE=MyISAM AUTO_INCREMENT=5 DEFAULT CHARSET=utf8 COMMENT='后台管理员表';
+) ENGINE=MyISAM AUTO_INCREMENT=20 DEFAULT CHARSET=utf8 COMMENT='后台管理员表';
 
 -- ----------------------------
 -- Records of z_admin
 -- ----------------------------
-INSERT INTO `z_admin` VALUES ('1', 'root', 'e10adc3949ba59abbe56e057f20f883e', 'zyc', '392318709', '0', '1', '127.0.0.1', '1509963023');
+INSERT INTO `z_admin` VALUES ('1', 'root', 'e10adc3949ba59abbe56e057f20f883e', '超级管理员', '392318709', '0', '0', '1', '127.0.0.1', '2017-11-07 17:18:33');
+INSERT INTO `z_admin` VALUES ('5', 'zjl1', 'e10adc3949ba59abbe56e057f20f883e', '张顺', '', '0', '1', '1', '', '0000-00-00 00:00:00');
+INSERT INTO `z_admin` VALUES ('6', 'zhangchao', 'e10adc3949ba59abbe56e057f20f883e', '张超', '', '0', '5', '1', '127.0.0.1', '2017-11-07 18:13:41');
+INSERT INTO `z_admin` VALUES ('7', 'yangjiayue', 'e10adc3949ba59abbe56e057f20f883e', '杨家岳', '', '0', '6', '1', '', '0000-00-00 00:00:00');
+INSERT INTO `z_admin` VALUES ('9', 'yuangong2', 'e10adc3949ba59abbe56e057f20f883e', '张英', '', '0', '6', '1', '', '0000-00-00 00:00:00');
+INSERT INTO `z_admin` VALUES ('10', 'zjl2', 'e10adc3949ba59abbe56e057f20f883e', '尹迪', '', '0', '1', '1', '', '0000-00-00 00:00:00');
+INSERT INTO `z_admin` VALUES ('11', 'wangkun', 'e10adc3949ba59abbe56e057f20f883e', '王坤', '', '0', '10', '1', '', '0000-00-00 00:00:00');
+INSERT INTO `z_admin` VALUES ('12', 'wuyifan', 'e10adc3949ba59abbe56e057f20f883e', '吴亦凡', '', '0', '6', '1', '', '0000-00-00 00:00:00');
+INSERT INTO `z_admin` VALUES ('13', 'wangjinling', 'e10adc3949ba59abbe56e057f20f883e', '王金玲', '', '0', '11', '1', '', '0000-00-00 00:00:00');
+INSERT INTO `z_admin` VALUES ('14', 'wangyulu', 'e10adc3949ba59abbe56e057f20f883e', '王雨露', '', '0', '11', '1', '', '0000-00-00 00:00:00');
+INSERT INTO `z_admin` VALUES ('15', 'lixueqin', 'e10adc3949ba59abbe56e057f20f883e', '李雪琴', '', '0', '11', '1', '', '0000-00-00 00:00:00');
 
 -- ----------------------------
 -- Table structure for z_auth_group
@@ -49,7 +60,7 @@ CREATE TABLE `z_auth_group` (
   `rules` char(80) NOT NULL DEFAULT '',
   `pid` mediumint(8) unsigned NOT NULL DEFAULT '0' COMMENT '父id',
   PRIMARY KEY (`id`)
-) ENGINE=MyISAM AUTO_INCREMENT=7 DEFAULT CHARSET=utf8;
+) ENGINE=MyISAM AUTO_INCREMENT=12 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Records of z_auth_group
@@ -58,7 +69,7 @@ INSERT INTO `z_auth_group` VALUES ('1', '超级管理员', '1', '', '0');
 INSERT INTO `z_auth_group` VALUES ('2', '总经理', '1', '', '1');
 INSERT INTO `z_auth_group` VALUES ('3', '经理', '1', '', '2');
 INSERT INTO `z_auth_group` VALUES ('4', '员工', '1', '', '3');
-INSERT INTO `z_auth_group` VALUES ('5', '外协', '1', '', '4');
+INSERT INTO `z_auth_group` VALUES ('11', '外协', '1', '', '4');
 
 -- ----------------------------
 -- Table structure for z_auth_group_access
@@ -76,6 +87,17 @@ CREATE TABLE `z_auth_group_access` (
 -- Records of z_auth_group_access
 -- ----------------------------
 INSERT INTO `z_auth_group_access` VALUES ('1', '1');
+INSERT INTO `z_auth_group_access` VALUES ('5', '2');
+INSERT INTO `z_auth_group_access` VALUES ('6', '3');
+INSERT INTO `z_auth_group_access` VALUES ('7', '4');
+INSERT INTO `z_auth_group_access` VALUES ('8', '11');
+INSERT INTO `z_auth_group_access` VALUES ('9', '4');
+INSERT INTO `z_auth_group_access` VALUES ('10', '2');
+INSERT INTO `z_auth_group_access` VALUES ('11', '3');
+INSERT INTO `z_auth_group_access` VALUES ('12', '4');
+INSERT INTO `z_auth_group_access` VALUES ('13', '4');
+INSERT INTO `z_auth_group_access` VALUES ('14', '4');
+INSERT INTO `z_auth_group_access` VALUES ('15', '4');
 
 -- ----------------------------
 -- Table structure for z_auth_rule
