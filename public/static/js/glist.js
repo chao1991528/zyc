@@ -9,24 +9,16 @@ $(document).ready(function () {
             url: '/admin/AdminGroup/localisation'
         },
         "columns": [
-            {
-                "data": "id", 
-                "sClass": "text-center", 
-                "render": function (data, type, full, meta) {
-                    return '<input type="checkbox"  class="checkchild"  value="' + data + '" />';
-                }
-            },
             {"data": "_name"}
         ],
         "aoColumnDefs": [
-            { "sWidth": "8%", "aTargets": [0] },
-            { "sWidth": "45%", "aTargets": [1] },
+            { "sWidth": "50%", "aTargets": [0] },
             { 
                 "data":"id",
                 "sClass": "text-center",
-                "aTargets": [2], 
+                "aTargets": [1], 
                 "render":function(data, type, row){
-                   return "<a href='javascript:;' class='rowEdit' data-id='"+ data +"'>编辑</a> | <a href='javascript:;' class='distribute'>分配权限</a>";
+                   return "<a href='javascript:;' class='rowEdit' data-id='"+ data +"'>编辑</a> | <a href='javascript:;' class='rowDel'>删除</a> | <a href='javascript:;' class='distribute'>分配权限</a>";
                 }                    
             }
         ]  
@@ -55,11 +47,8 @@ $(document).ready(function () {
         var url = isEdit ? editUrl : addUrl;
         $.post(url, $('#form').serialize(), function (data) {
             if (data.code === 200) {
-                layer.closeAll();
-                $('#form').addClass('hidden');
-                layer.msg(message, {time: 2000});
-                isEdit ? dTable.ajax.reload(null, false) : dTable.ajax.reload();
                 $('#form')[0].reset();
+                window.location.reload();
             } else {
                 layer.msg(data.message, {time: 1500});
             }
@@ -120,6 +109,26 @@ $(document).ready(function () {
                 return false;
             }
         });
+    });
+    
+    //点击删除按钮
+    $('#typeList').on('click', '.rowDel', function(){
+        var id = $(this).siblings('.rowEdit').attr('data-id');
+        layer.confirm(
+            '确定删除吗？',
+            {
+                btn: ['确定', '取消'] //按钮
+            },
+            function () {
+                $.post(delUrl, {id:id}, function (data) {
+                    if (data.code === 200) {
+                        window.location.reload();
+                    }else{
+                        layer.msg(data.message, {time: 1500});
+                    }
+                });
+            }
+        );
     });
     
 });

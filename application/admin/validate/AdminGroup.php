@@ -6,7 +6,7 @@ use think\Validate;
 class AdminGroup extends Validate
 {
     protected $rule = [
-        'title'  =>  'require|max:20|min:2|unique:auth_rule'
+        'title'  =>  'require|max:20|min:2|unique:auth_group'
     ];
     protected $message  =   [
         'title.require' => '管理员组名必须',

@@ -19,8 +19,7 @@ class AdminGroup extends AdminController {
         ];
         $this->set_view($setView);
         //获取管理员组
-        $ids = getSubIds('AuthGroup', session('gid'), true);
-        $groups = db('AuthGroup')->where('id', 'in', $ids)->column('id, title');
+        $groups = db('AuthGroup')->column('id, title');
              
         return view('glist', [ 'groups' => $groups ]);
     }
@@ -38,8 +37,7 @@ class AdminGroup extends AdminController {
 
 
     public function doAdminGroupList(){
-        $ids = getSubIds('AuthGroup', session('gid'), true);
-        $origin_data = db('AuthGroup')->field('id,pid,title')->where('id', 'in', $ids)->select();
+        $origin_data = db('AuthGroup')->field('id,pid,title')->select();
         $data = \auth\Tree::tree($origin_data, 'title', 'id', 'pid');
         return $this->resData($data);
     }
@@ -67,15 +65,19 @@ class AdminGroup extends AdminController {
     
     //删除管理员组信息
     public function doDelAdminGroup(){
-        $ids = input('post.ids');
-        if (!$ids) {
+        $id = input('post.id');
+        if (!$id) {
             return $this->resMes(300);
         }
-        $counts = db('AuthGroupAccess')->where('group_id', 'in', $ids)->count();
-        if($counts){
+        $count1 = db('AuthGroupAccess')->where('group_id', $id)->count();
+        if($count1){
             return $this->resMes(444, '该组下还有用户，不能删除');
         }
-        $res = db('AuthGroup')->where('id', 'in', $ids)->delete();
+        $count2 = db('AuthGroup')->where('pid', $id)->count();
+        if($count2){
+            return $this->resMes(444, '该组下还有子分组，不能删除');
+        }
+        $res = db('AuthGroup')->where('id',  $id)->delete();
         return $res ? $this->resMes(200) : $this->resMes(400);
     }
     

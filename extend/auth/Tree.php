@@ -102,12 +102,13 @@ final class Tree {
      * @param $title 字段名
      * @param string $fieldPri 主键id
      * @param string $fieldPid 父id
+     * @param string $pid 从哪个值开始
      * @return array
      */
-    static public function tree($data, $title, $fieldPri = 'cid', $fieldPid = 'pid') {
+    static public function tree($data, $title, $fieldPri = 'cid', $fieldPid = 'pid', $pid=0) {
         if (!is_array($data) || empty($data))
             return array();
-        $arr = self::channelList($data, 0, '', $fieldPri, $fieldPid);
+        $arr = self::channelList($data, $pid, '', $fieldPri, $fieldPid);
         foreach ($arr as $k => $v) {
             $str = "";
             if ($v['_level'] > 2) {
