@@ -98,7 +98,6 @@ class AdminController extends Controller {
         $module = $request->module();
         $controller = $request->controller();
         $action = $request->action();
-        echo $module .'/'.$controller.'/'.$action;die;
         $rs = $auth->check($module .'/'.$controller.'/'.$action, session('id'));
         if(!$rs){
             if ($request->isAjax()){

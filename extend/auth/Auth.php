@@ -159,7 +159,7 @@ class Auth {
         }
         $map = [
             'id' => ['in', $ids],
-            'type' => $type
+            'status' => 1
         ];
         //读取用户组所有权限规则
         $rules = db($this->config['auth_rule'])->where($map)->field('condition,name')->select();
