@@ -10,7 +10,8 @@ use app\admin\common\AdminController;
 class AuthRule extends AdminController {
 
     protected $beforeActionList = [
-        'loginNeed'
+        'loginNeed',
+        'checkAuth' =>  ['except'=>'doRuleList'],
     ];
 
     //规则列表页面

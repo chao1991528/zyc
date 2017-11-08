@@ -8,7 +8,8 @@ use think\Db;
 class Admin extends AdminController {
 
     protected $beforeActionList = [
-        'loginNeed'
+        'loginNeed',
+        'checkAuth' =>  ['except'=>'doAdminList']
     ];
     
     //管理员列表

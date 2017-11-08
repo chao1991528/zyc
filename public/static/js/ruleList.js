@@ -50,6 +50,7 @@ $(document).ready(function () {
                 layer.msg(message, {time: 2000});
                 isEdit ? dTable.ajax.reload(null, false) : dTable.ajax.reload();
                 $(".formbody input[name='pid']").val(0);
+                $(".formbody input[name='id']").removeAttr('value');
                 $('#form')[0].reset();
             } else {
                 layer.msg(data.message, {time: 1500});
@@ -94,7 +95,8 @@ $(document).ready(function () {
             success: function (layero, index) {
                 $(".forminfo input[name='id']").val(id);
                 $.post(viewUrl, {id:id},function (data) {            
-                    if (data.code === 200) { 
+                    if (data.code === 200) {
+                        $("#form input[name='pid']").val(data.data.pid);
                         $("input[name='title']").val(data.data.title);
                         $("input[name='name']").val(data.data.name);
                     } else {

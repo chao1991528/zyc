@@ -118,9 +118,9 @@ $(function () {
     //添加按钮点击
     $('.toolbar').children('li').eq(0).click(function () {
         $('#form').removeClass('hidden');
-        $('.submitBtn').val('添加');
-        $('.formtitle span').eq(0).html('添加');
-        $(".forminfo input[name='id']").val('');
+        $('#form .submitBtn').val('添加');
+        $('#form .formtitle span').eq(0).html('添加');
+        $("#form .forminfo input[name='id']").val('');
         layer.open({
             type: 1,
             area: '700px',

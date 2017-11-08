@@ -8,11 +8,12 @@ use think\Db;
 class AdminGroup extends AdminController {
 
     protected $beforeActionList = [
-        'loginNeed'
+        'loginNeed',
+        'checkAuth' =>  ['except'=>'doAdminGroupList']
     ];
     
     //管理员组列表
-    public function glist(){
+    public function glist(){        
         $setView = [
             'css' => ['style', 'bootstrap.min', 'dataTables.bootstrap'],
             'js'  => ['jquery.dataTables.min','dataTables.bootstrap', 'select-ui.min','glist']
@@ -20,13 +21,32 @@ class AdminGroup extends AdminController {
         $this->set_view($setView);
         //获取管理员组
         $groups = db('AuthGroup')->column('id, title');
-             
-        return view('glist', [ 'groups' => $groups ]);
+        
+        //获取权限列表
+        $rules = db('AuthRule')->field('id,title,pid')->order('pid')->select();
+        $ruleDatas = [];
+        $i = 0;
+        foreach ($rules as $v){
+            if($v['pid'] == 0){                
+                $ruleDatas[$i]['id'] = $v['id'];
+                $ruleDatas[$i]['title'] = $v['title'];
+                $ruleDatas[$i]['subs'] = [];
+                $i++;
+            }else{
+                foreach ($ruleDatas as &$v2){
+                    if($v['pid'] == $v2['id']){
+                        $v2['subs'][] = $v;
+                    }
+                }
+            }
+        }             
+        return view('glist', [ 'groups' => $groups, 'ruleDatas' => $ruleDatas ]);
     }
 
         //管理员添加
     public function doAddAdminGroup(){
         $data = input('post.');
+        $data['rules'] = implode(',',$data['rules']);
         $result = $this->validate($data, 'AdminGroup');
         if (true !== $result) {
             return $this->resMes('444', $result);
@@ -55,6 +75,7 @@ class AdminGroup extends AdminController {
     //修改管理员组信息
     public function doEditAdminGroup() {
         $data = input('post.');
+        $data['rules'] = implode(',',$data['rules']);
         $result = $this->validate($data, 'AdminGroup.edit');
         if (true !== $result) {
             return $this->resMes('444', $result);

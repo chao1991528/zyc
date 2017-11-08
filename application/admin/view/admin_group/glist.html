@@ -47,39 +47,20 @@
             <li>
                 <label>组名<b>*</b></label>                
                 <input name="title" type="text" class="dfinput" placeholder="组名至少2个但不能超过20个字符"/><b></b>
-            </li>            
-                       
-            <li style="margin-top: 25px;margin-bottom: 40px;">
-                <input type="button" class="btn btn-primary submitBtn" value=""/>
             </li>
-        </ul>
-    </div>
-</form>
 
-<form id="form2" class="hidden">
-    <div class="formbody">       
-        <div class="formtitle"><b><span></span><span>权限</span></b></div>
-        <input type="hidden" name="pid" value="0"/>
-        <ul class="forminfo">
-            <input type="hidden" name="id"/>
+            {volist name="ruleDatas" id="vo"}
             <li>
-                <label>上级<b>*</b></label>
-                <div class="usercity">
-                    <select class="select2" name="pid" style="width: 167px;">
-                        <option value="0">请选择上级</option>
-                        {volist name='groups' id='vo'}                                 
-                        <option value="{$key}">{$vo}</option>       
-                        {/volist}
-                    </select>
+                <label><input type="checkbox" name="rules[]" class="checkbox2" value="{$vo.id}"/>{$vo.title}</label>
+                <div class="rightinput">
+                    {volist name="vo.subs" id="sub"}
+                    <div class="checkbox3"><input type="checkbox" name="rules[]" class="checkbox2" value="{$sub.id}"/>{$sub.title}</div>
+                    {/volist}
                 </div>
             </li>
-            
-            <li>
-                <label>组名<b>*</b></label>                
-                <input name="title" type="text" class="dfinput" placeholder="组名至少2个但不能超过20个字符"/><b></b>
-            </li>            
+            {/volist}   
                        
-            <li style="margin-top: 25px;margin-bottom: 40px;">
+            <li style="margin-top: 75px;margin-bottom: 40px;">
                 <input type="button" class="btn btn-primary submitBtn" value=""/>
             </li>
         </ul>

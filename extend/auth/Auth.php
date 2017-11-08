@@ -1,5 +1,7 @@
 <?php
 namespace auth;
+use think\Loader;
+use think\Db;
 class Auth {
 
     /**
@@ -32,7 +34,7 @@ class Auth {
             $this->config = array_merge($this->config, $auth);
         }
         // 初始化request
-        $this->request = Request::instance();
+        $this->request = request();
     }
 
     /**

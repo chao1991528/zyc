@@ -10,7 +10,7 @@ Target Server Type    : MYSQL
 Target Server Version : 100113
 File Encoding         : 65001
 
-Date: 2017-11-07 18:49:40
+Date: 2017-11-08 18:34:59
 */
 
 SET FOREIGN_KEY_CHECKS=0;
@@ -37,7 +37,7 @@ CREATE TABLE `z_admin` (
 -- ----------------------------
 -- Records of z_admin
 -- ----------------------------
-INSERT INTO `z_admin` VALUES ('1', 'root', 'e10adc3949ba59abbe56e057f20f883e', '超级管理员', '392318709', '0', '0', '1', '127.0.0.1', '2017-11-07 17:18:33');
+INSERT INTO `z_admin` VALUES ('1', 'root', 'e10adc3949ba59abbe56e057f20f883e', '超级管理员', '392318709', '0', '0', '1', '127.0.0.1', '2017-11-08 18:23:13');
 INSERT INTO `z_admin` VALUES ('5', 'zjl1', 'e10adc3949ba59abbe56e057f20f883e', '张顺', '', '0', '1', '1', '', '0000-00-00 00:00:00');
 INSERT INTO `z_admin` VALUES ('6', 'zhangchao', 'e10adc3949ba59abbe56e057f20f883e', '张超', '', '0', '5', '1', '127.0.0.1', '2017-11-07 18:13:41');
 INSERT INTO `z_admin` VALUES ('7', 'yangjiayue', 'e10adc3949ba59abbe56e057f20f883e', '杨家岳', '', '0', '6', '1', '', '0000-00-00 00:00:00');
@@ -60,16 +60,16 @@ CREATE TABLE `z_auth_group` (
   `rules` char(80) NOT NULL DEFAULT '',
   `pid` mediumint(8) unsigned NOT NULL DEFAULT '0' COMMENT '父id',
   PRIMARY KEY (`id`)
-) ENGINE=MyISAM AUTO_INCREMENT=12 DEFAULT CHARSET=utf8;
+) ENGINE=MyISAM AUTO_INCREMENT=13 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Records of z_auth_group
 -- ----------------------------
-INSERT INTO `z_auth_group` VALUES ('1', '超级管理员', '1', '', '0');
+INSERT INTO `z_auth_group` VALUES ('1', '超级管理员', '1', '36,45,38,39,40,37,1,2,6,5,46,4,18,42,41,19,44,43', '0');
 INSERT INTO `z_auth_group` VALUES ('2', '总经理', '1', '', '1');
-INSERT INTO `z_auth_group` VALUES ('3', '经理', '1', '', '2');
-INSERT INTO `z_auth_group` VALUES ('4', '员工', '1', '', '3');
-INSERT INTO `z_auth_group` VALUES ('11', '外协', '1', '', '4');
+INSERT INTO `z_auth_group` VALUES ('3', '经理', '1', '42,41,19,43', '2');
+INSERT INTO `z_auth_group` VALUES ('4', '员工', '1', '18,41,19', '3');
+INSERT INTO `z_auth_group` VALUES ('11', '外协', '1', '19,6', '4');
 
 -- ----------------------------
 -- Table structure for z_auth_group_access
@@ -113,19 +113,29 @@ CREATE TABLE `z_auth_rule` (
   `pid` mediumint(8) unsigned NOT NULL DEFAULT '0' COMMENT '父id',
   PRIMARY KEY (`id`),
   UNIQUE KEY `name` (`name`)
-) ENGINE=MyISAM AUTO_INCREMENT=35 DEFAULT CHARSET=utf8;
+) ENGINE=MyISAM AUTO_INCREMENT=47 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Records of z_auth_rule
 -- ----------------------------
-INSERT INTO `z_auth_rule` VALUES ('2', 'Admin/AuthRule/ruleList', '权限列表', '0', '1', '', '1');
-INSERT INTO `z_auth_rule` VALUES ('1', 'Admin/AuthRule/', '权限管理', '0', '1', '', '0');
-INSERT INTO `z_auth_rule` VALUES ('4', 'Admin/AuthRule/doAddRule', '添加权限', '0', '1', '', '1');
-INSERT INTO `z_auth_rule` VALUES ('5', 'Admin/AuthRule/doEditRule', '编辑权限', '0', '1', '', '1');
-INSERT INTO `z_auth_rule` VALUES ('6', 'Admin/AuthRule/doDelRule', '删除权限', '0', '1', '', '1');
-INSERT INTO `z_auth_rule` VALUES ('18', 'Admin/Admin/', '用户管理', '0', '1', '', '0');
-INSERT INTO `z_auth_rule` VALUES ('19', 'Admin/Admin/alist', '用户列表', '0', '1', '', '18');
-INSERT INTO `z_auth_rule` VALUES ('24', 'Admin/Record/', '肌肤测评管理', '0', '1', '', '21');
+INSERT INTO `z_auth_rule` VALUES ('2', 'Admin/AuthRule/ruleList', '规则列表', '0', '1', '', '1');
+INSERT INTO `z_auth_rule` VALUES ('1', 'Admin/AuthRule/', '规则管理', '0', '1', '', '0');
+INSERT INTO `z_auth_rule` VALUES ('4', 'Admin/AuthRule/doAddRule', '添加规则', '0', '1', '', '1');
+INSERT INTO `z_auth_rule` VALUES ('5', 'Admin/AuthRule/doEditRule', '编辑规则', '0', '1', '', '1');
+INSERT INTO `z_auth_rule` VALUES ('6', 'Admin/AuthRule/doDelRule', '删除规则', '0', '1', '', '1');
+INSERT INTO `z_auth_rule` VALUES ('18', 'Admin/Admin/', '管理员管理', '0', '1', '', '0');
+INSERT INTO `z_auth_rule` VALUES ('19', 'Admin/Admin/alist', '管理员列表', '0', '1', '', '18');
+INSERT INTO `z_auth_rule` VALUES ('41', 'Admin/Admin/doEditAdmin', '管理员编辑', '0', '1', '', '18');
+INSERT INTO `z_auth_rule` VALUES ('37', 'Admin/AdminGroup/glist', '组列表', '0', '1', '', '36');
+INSERT INTO `z_auth_rule` VALUES ('36', 'Admin/AdminGroup/', '管理员组管理', '0', '1', '', '0');
+INSERT INTO `z_auth_rule` VALUES ('40', 'Admin/AdminGroup/doEditAdminGroup', '组编辑', '0', '1', '', '36');
+INSERT INTO `z_auth_rule` VALUES ('42', 'Admin/Admin/doAddAdmin', '管理员添加', '0', '1', '', '18');
+INSERT INTO `z_auth_rule` VALUES ('39', 'Admin/AdminGroup/doDelAdminGroup', '组删除', '0', '1', '', '36');
+INSERT INTO `z_auth_rule` VALUES ('38', 'Admin/AdminGroup/doAddAdminGroup', '组添加', '0', '1', '', '36');
+INSERT INTO `z_auth_rule` VALUES ('43', 'Admin/Admin/doAdminDel', '管理员删除', '0', '1', '', '18');
+INSERT INTO `z_auth_rule` VALUES ('44', 'Admin/Admin/viewAdmin', '管理员查看', '0', '1', '', '18');
+INSERT INTO `z_auth_rule` VALUES ('45', 'Admin/AdminGroup/viewAdminGroup', '组查看', '0', '1', '', '36');
+INSERT INTO `z_auth_rule` VALUES ('46', 'Admin/AuthRule/viewRule', '查看规则', '0', '1', '', '1');
 
 -- ----------------------------
 -- Table structure for z_log

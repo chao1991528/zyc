@@ -18,7 +18,7 @@ $(document).ready(function () {
                 "sClass": "text-center",
                 "aTargets": [1], 
                 "render":function(data, type, row){
-                   return "<a href='javascript:;' class='rowEdit' data-id='"+ data +"'>编辑</a> | <a href='javascript:;' class='rowDel'>删除</a> | <a href='javascript:;' class='distribute'>分配权限</a>";
+                   return "<a href='javascript:;' class='rowEdit' data-id='"+ data +"'>编辑</a> | <a href='javascript:;' class='rowDel'>删除</a>";
                 }                    
             }
         ]  
@@ -35,7 +35,7 @@ $(document).ready(function () {
     
     //添加/保存页面点击添加按钮
     $('.submitBtn').click(function(){
-        var isEdit = $(".forminfo input[name='id']").val().length;
+        var isEdit = $("#form .forminfo input[name='id']").val().length;
         var message;
         if(isEdit){
             url = editUrl;
@@ -53,50 +53,38 @@ $(document).ready(function () {
                 layer.msg(data.message, {time: 1500});
             }
         });
-    });
-    
-    //权限分配按钮点击
-    $('#typeList').on('click', '.distribute', function(){
-        var id = $(this).attr('data-id');
-        $('#form').removeClass('hidden');
-        $('.submitBtn').val('添加');
-        $('.formtitle span').eq(0).html('添加');        
-        layer.open({
-            type: 1,
-            area: '700px',
-            shadeClose: false,
-            content: $('#form'),
-            success: function (layero, index) {
-                $(".formbody input[name='pid']").val(id);
-            },
-            cancel: function (index, layero) {
-                $('#form')[0].reset();
-                $('#form').addClass('hidden');
-                layer.close(index);
-                return false;
-            }
-        });
-    });
+    });    
     
     //点击编辑按钮
     $('#typeList').on('click', '.rowEdit', function(){
         var id = $(this).attr('data-id');
         $('#form').removeClass('hidden');
-        $('.submitBtn').val('保存');
-        $('.formtitle span').eq(0).html('编辑');        
+        $('#form .submitBtn').val('保存');
+        $('#form .formtitle span').eq(0).html('编辑');        
         layer.open({
             type: 1,
             area: '700px',
             shadeClose: false,
             content: $('#form'),
             success: function (layero, index) {
-                $(".forminfo input[name='id']").val(id);
+                $("#form .forminfo input[name='id']").val(id);
                 $.post(viewUrl, {id:id},function (data) {            
                     if (data.code === 200) { 
-                        $("input[name='title']").val(data.data.title);
-                        var pidSelect = $(".forminfo select[name='pid']");
+                        $("#form input[name='title']").val(data.data.title);
+                        var pidSelect = $("#form .forminfo select[name='pid']");
                         pidSelect.val(data.data['pid']);
                         pidSelect.siblings('.uew-select-value').children('em').eq(0).html(pidSelect.find("option:selected").text());
+                        var checkboxes = $("#form .forminfo input[name='rules[]']");
+                        var rules = data.data.rules.split(',');
+                        $.each(rules, function(){
+                            var val = this;
+                            $.each(checkboxes, function(){
+                                if($(this).val() == val){
+                                    $(this).prop('checked', "true");
+                                }
+                            });
+                        });
+
                     } else {
                         layer.msg(data.message, {time: 1500});
                     }
@@ -105,6 +93,7 @@ $(document).ready(function () {
             cancel: function (index, layero) {
                 $('#form')[0].reset();
                 $('#form').addClass('hidden');
+                $("#form .forminfo input[name='rules[]']").removeAttr("checked");
                 layer.close(index);
                 return false;
             }

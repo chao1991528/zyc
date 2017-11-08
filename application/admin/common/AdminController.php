@@ -90,5 +90,23 @@ class AdminController extends Controller {
         ];
         return json($data);
     }
+    
+    //权限检查
+    public function checkAuth(){
+        $auth = new \auth\Auth();
+        $request = request();
+        $module = $request->module();
+        $controller = $request->controller();
+        $action = $request->action();
+        echo $module .'/'.$controller.'/'.$action;die;
+        $rs = $auth->check($module .'/'.$controller.'/'.$action, session('id'));
+        if(!$rs){
+            if ($request->isAjax()){
+                return $this->resMes(406);
+            } else {
+                echo '你没有权限';die;
+            }
+        }
+    }
 
 }
