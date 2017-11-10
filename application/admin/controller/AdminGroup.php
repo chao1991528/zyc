@@ -9,7 +9,8 @@ class AdminGroup extends AdminController {
 
     protected $beforeActionList = [
         'loginNeed',
-        'checkAuth' =>  ['except'=>'doAdminGroupList']
+//        'checkAuth' =>  ['except'=>'doAdminGroupList'],
+        'leftMenuData' =>  ['only'=>'glist']
     ];
     
     //管理员组列表
@@ -21,7 +22,7 @@ class AdminGroup extends AdminController {
         $this->set_view($setView);
         //获取管理员组
         $groups = db('AuthGroup')->column('id, title');
-        
+                
         //获取权限列表
         $rules = db('AuthRule')->field('id,title,pid')->order('pid')->select();
         $ruleDatas = [];

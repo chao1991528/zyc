@@ -152,11 +152,12 @@ class Auth {
             $ids = array_merge($ids, explode(',', trim($g['rules'], ',')));
         }
         $ids = array_unique($ids);
+        session('_auth_rule_ids', $ids);
         if (empty($ids)) {
             $_authList[$uid . $t] = [];
 
             return [];
-        }
+        }        
         $map = [
             'id' => ['in', $ids],
             'status' => 1

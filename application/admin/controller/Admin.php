@@ -9,7 +9,8 @@ class Admin extends AdminController {
 
     protected $beforeActionList = [
         'loginNeed',
-        'checkAuth' =>  ['except'=>'doAdminList']
+//        'checkAuth' =>  ['except'=>'doAdminList'],
+        'leftMenuData' =>  ['only'=>'alist']
     ];
     
     //管理员列表
@@ -18,7 +19,7 @@ class Admin extends AdminController {
             'css' => ['style', 'bootstrap.min', 'dataTables.bootstrap'],
             'js'  => ['jquery.dataTables.min', 'dataTables.bootstrap', 'select-ui.min', 'alist']
         ];
-        $this->set_view($setView);
+        $this->set_view($setView);        
         
         //获取组信息
         $ids = getSubIds('AuthGroup', session('gid'));

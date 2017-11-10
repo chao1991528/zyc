@@ -7,34 +7,35 @@
                 <span><img src="/static/images/leftico01.png" /></span>管理信息
             </div>
             <ul class="menuson">		                       
-                <li {eq name="Request.controller" value="Record"} class="active"{/eq}>
+<!--                <li {eq name="Request.controller" value="Record"} class="active"{/eq}>
                     <div class="header">
                         <cite></cite>
-                        <a href="{eq name='Request.action' value='rlist'}javascript:;{else/}{:url('admin/Record/rlist')}{/eq}">肌肤测评管理</a>
+                        <a href="{:url('admin/Record/rlist')}">肌肤测评管理</a>
                         <i></i>
                     </div>
-<!--                    <ul class="sub-menus" {eq name="Request.controller" value="Index"}style="display:block" {/else}class="hidden"{/eq}>
+                    <ul class="sub-menus" {eq name="Request.controller" value="Index"}style="display:block" {/else}class="hidden"{/eq}>
                         <li {eq name='Request.action' value='bgimage'}class="active"{/eq}>
                             <a href="{eq name='Request.action' value='bgimage'}javascript:;{else/}{:url('admin/index/bgimage')}{/eq}">背景管理</a>
                         </li>
                         <li {eq name='Request.action' value='concept'}class="active"{/eq}>
                             <a href="{eq name='Request.action' value='concept'}javascript:;{else/}{:url('admin/index/concept')}{/eq}">产品理念管理</a>
                         </li>
-                    </ul>-->
-                </li>
-                
-                <li {eq name="Request.controller" value="Admin"} class="active"{/eq}>
+                    </ul>
+                </li>-->
+                {volist name="leftMenu" id="vo"}
+                <li {eq name="Request.controller" value="$vo.controller"} class="active"{/eq}>
                     <div class="header">
                         <cite></cite>
-                        <a href="{eq name='Request.action' value='alist'}javascript:;{else/}{:url('admin/admin/alist')}{/eq}">管理员管理</a>
+                        <a href="{:url($vo.url)}">{$vo.title}</a>
                         <i></i>
                     </div>                
                 </li>
+                {/volist}
                 
-                <li {eq name="Request.controller" value="AdminGroup"} class="active"{/eq}>
+<!--                <li {eq name="Request.controller" value="AdminGroup"} class="active"{/eq}>
                     <div class="header">
                         <cite></cite>
-                        <a href="{eq name='Request.action' value='glist'}javascript:;{else/}{:url('admin/AdminGroup/glist')}{/eq}">管理员组管理</a>
+                        <a href="{:url('admin/AdminGroup/glist')}">管理员组管理</a>
                         <i></i>
                     </div>                
                 </li>
@@ -42,10 +43,10 @@
                 <li {eq name="Request.controller" value="AuthRule"} class="active"{/eq}>
                     <div class="header">
                         <cite></cite>
-                        <a href="{eq name='Request.action' value='ruleList'}javascript:;{else/}{:url('admin/AuthRule/ruleList')}{/eq}">规则管理</a>
+                        <a href="{:url('admin/AuthRule/ruleList')}">规则管理</a>
                         <i></i>
                     </div>                
-                </li>
+                </li>-->
                                
             </ul>    
         </dd> 	    

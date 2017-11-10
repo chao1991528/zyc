@@ -4,9 +4,9 @@ use app\admin\common\AdminController;
 use think\captcha\Captcha;
 class Index extends AdminController
 {
-//    protected $beforeActionList = [
-//        'loginNeed' => ['except' => 'index,verify'],
-//    ];
+    protected $beforeActionList = [
+        'loginNeed' => ['only' => 'doLogout'],
+    ];
     
     //登录页面
     public function index() {

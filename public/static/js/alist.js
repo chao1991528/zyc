@@ -128,6 +128,8 @@ $(document).ready(function () {
                         groupSelect.val(data.data.group_id);
                         groupSelect.siblings('.uew-select-value').children('em').eq(0).html(groupSelect.find("option:selected").text());
                     } else {
+                        alert(data);
+                        alert(data.message);
                         layer.msg(data.message, {time: 1500});
                     }
                 });

@@ -8,10 +8,11 @@ use app\admin\common\AdminController;
  * 规则控制器类
  */
 class AuthRule extends AdminController {
+    protected $authMethod = ['ruleList', 'doEditRule', 'viewRule', 'doAddRule', 'doDelRule'];
 
     protected $beforeActionList = [
         'loginNeed',
-        'checkAuth' =>  ['except'=>'doRuleList'],
+        'leftMenuData' =>  ['only'=>'ruleList']
     ];
 
     //规则列表页面
@@ -34,7 +35,7 @@ class AuthRule extends AdminController {
     //编辑规则
     public function doEditRule(){
         $data = input('post.');
-        $result = $this->validate($data, 'AuthRule.edit');
+        $result = $this->validate($data, 'AuthRule');
         if (true !== $result) {
             return $this->resMes('444', $result);
         }
