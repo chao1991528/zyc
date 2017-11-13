@@ -9,7 +9,7 @@ class AdminGroup extends AdminController {
 
     protected $beforeActionList = [
         'loginNeed',
-//        'checkAuth' =>  ['except'=>'doAdminGroupList'],
+        'checkAuth' =>  ['except'=>'doAdminGroupList,localisation'],
         'leftMenuData' =>  ['only'=>'glist']
     ];
     

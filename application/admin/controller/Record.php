@@ -10,7 +10,9 @@ use app\admin\common\AdminController;
 class Record extends AdminController {
 
     protected $beforeActionList = [
-        'loginNeed'
+        'loginNeed',
+        'checkAuth' =>  ['except'=>'doRlist,localisation'],
+        'leftMenuData' =>  ['only'=>'rlist']
     ];
 
     //肌肤测试记录列表页面

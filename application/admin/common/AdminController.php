@@ -8,18 +8,6 @@ class AdminController extends Controller {
 
     protected function _initialize() {
         parent::_initialize();
-        if(!empty(session('id')) && isset($this->authMethod) && !empty($this->authMethod)){
-            $request = request();
-            $action = $request->action();
-            if(in_array($action, $this->authMethod)){
-                if(!$this->checkAuth($request)){
-                    if ($request->isPost() || $request->isAjax()){
-                        return $this->resMes(406);
-                    }
-                    echo '无权限';die;                                      
-                }
-            }
-        }
     }
 
     protected function loginNeed() {
@@ -104,19 +92,24 @@ class AdminController extends Controller {
     }
     
     //权限检查
-    protected function checkAuth($request){
+    protected function checkAuth(){
+        $request = request();
         $auth = new \auth\Auth();
         $module = $request->module();
         $controller = $request->controller();
         $action = $request->action();
         $rs = $auth->check($module .'/'.$controller.'/'.$action, session('id'));
-        return $rs;
+        if(!$rs){
+            if ($request->isPost() || $request->isAjax()){
+                json(['code'=>406, 'message'=> '没有权限'])->send();die;
+            }
+            echo '你没有权限！';die;
+        }
     }
     
     //左侧菜单数据
     protected function leftMenuData(){
         $rule_ids = session('_auth_rule_ids');
-        var_dump($rule_ids);die;
         if($rule_ids){
             $leftMenu = [];
             $leftMenuData = db('AuthRule')->where('id', 'in', $rule_ids)->where('pid',0)->field('title,name')->select();

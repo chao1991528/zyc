@@ -10,7 +10,7 @@ Target Server Type    : MYSQL
 Target Server Version : 100113
 File Encoding         : 65001
 
-Date: 2017-11-08 18:34:59
+Date: 2017-11-13 18:02:43
 */
 
 SET FOREIGN_KEY_CHECKS=0;
@@ -37,9 +37,9 @@ CREATE TABLE `z_admin` (
 -- ----------------------------
 -- Records of z_admin
 -- ----------------------------
-INSERT INTO `z_admin` VALUES ('1', 'root', 'e10adc3949ba59abbe56e057f20f883e', '超级管理员', '392318709', '0', '0', '1', '127.0.0.1', '2017-11-08 18:23:13');
+INSERT INTO `z_admin` VALUES ('1', 'root', 'e10adc3949ba59abbe56e057f20f883e', '超级管理员', '392318709', '0', '0', '1', '127.0.0.1', '2017-11-13 10:42:33');
 INSERT INTO `z_admin` VALUES ('5', 'zjl1', 'e10adc3949ba59abbe56e057f20f883e', '张顺', '', '0', '1', '1', '', '0000-00-00 00:00:00');
-INSERT INTO `z_admin` VALUES ('6', 'zhangchao', 'e10adc3949ba59abbe56e057f20f883e', '张超', '', '0', '5', '1', '127.0.0.1', '2017-11-07 18:13:41');
+INSERT INTO `z_admin` VALUES ('6', 'zhangchao', 'e10adc3949ba59abbe56e057f20f883e', '张超', '', '0', '5', '1', '127.0.0.1', '2017-11-13 10:43:55');
 INSERT INTO `z_admin` VALUES ('7', 'yangjiayue', 'e10adc3949ba59abbe56e057f20f883e', '杨家岳', '', '0', '6', '1', '', '0000-00-00 00:00:00');
 INSERT INTO `z_admin` VALUES ('9', 'yuangong2', 'e10adc3949ba59abbe56e057f20f883e', '张英', '', '0', '6', '1', '', '0000-00-00 00:00:00');
 INSERT INTO `z_admin` VALUES ('10', 'zjl2', 'e10adc3949ba59abbe56e057f20f883e', '尹迪', '', '0', '1', '1', '', '0000-00-00 00:00:00');
@@ -65,9 +65,9 @@ CREATE TABLE `z_auth_group` (
 -- ----------------------------
 -- Records of z_auth_group
 -- ----------------------------
-INSERT INTO `z_auth_group` VALUES ('1', '超级管理员', '1', '36,45,38,39,40,37,1,2,6,5,46,4,18,42,41,19,44,43', '0');
+INSERT INTO `z_auth_group` VALUES ('1', '超级管理员', '1', '18,44,42,41,19,43,1,2,6,5,4,46,36,45,38,39,40,37,47,48,50', '0');
 INSERT INTO `z_auth_group` VALUES ('2', '总经理', '1', '', '1');
-INSERT INTO `z_auth_group` VALUES ('3', '经理', '1', '42,41,19,43', '2');
+INSERT INTO `z_auth_group` VALUES ('3', '经理', '1', '18,44,42,19,43,47,48,50', '2');
 INSERT INTO `z_auth_group` VALUES ('4', '员工', '1', '18,41,19', '3');
 INSERT INTO `z_auth_group` VALUES ('11', '外协', '1', '19,6', '4');
 
@@ -111,23 +111,22 @@ CREATE TABLE `z_auth_rule` (
   `status` tinyint(1) NOT NULL DEFAULT '1' COMMENT '状态：为1正常，为0禁用',
   `condition` char(100) NOT NULL DEFAULT '' COMMENT '规则表达式，为空表示存在就验证，不为空表示按照条件验证， 如定义{score}>5  and {score}<100，表示用户的分数在5-100之间时这条规则才会通过。',
   `pid` mediumint(8) unsigned NOT NULL DEFAULT '0' COMMENT '父id',
-  PRIMARY KEY (`id`),
-  UNIQUE KEY `name` (`name`)
-) ENGINE=MyISAM AUTO_INCREMENT=47 DEFAULT CHARSET=utf8;
+  PRIMARY KEY (`id`)
+) ENGINE=MyISAM AUTO_INCREMENT=51 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Records of z_auth_rule
 -- ----------------------------
 INSERT INTO `z_auth_rule` VALUES ('2', 'Admin/AuthRule/ruleList', '规则列表', '0', '1', '', '1');
-INSERT INTO `z_auth_rule` VALUES ('1', 'Admin/AuthRule/', '规则管理', '0', '1', '', '0');
+INSERT INTO `z_auth_rule` VALUES ('1', 'Admin/AuthRule/ruleList', '规则管理', '0', '1', '', '0');
 INSERT INTO `z_auth_rule` VALUES ('4', 'Admin/AuthRule/doAddRule', '添加规则', '0', '1', '', '1');
 INSERT INTO `z_auth_rule` VALUES ('5', 'Admin/AuthRule/doEditRule', '编辑规则', '0', '1', '', '1');
 INSERT INTO `z_auth_rule` VALUES ('6', 'Admin/AuthRule/doDelRule', '删除规则', '0', '1', '', '1');
-INSERT INTO `z_auth_rule` VALUES ('18', 'Admin/Admin/', '管理员管理', '0', '1', '', '0');
+INSERT INTO `z_auth_rule` VALUES ('18', 'Admin/Admin/alist', '管理员管理', '0', '1', '', '0');
 INSERT INTO `z_auth_rule` VALUES ('19', 'Admin/Admin/alist', '管理员列表', '0', '1', '', '18');
 INSERT INTO `z_auth_rule` VALUES ('41', 'Admin/Admin/doEditAdmin', '管理员编辑', '0', '1', '', '18');
 INSERT INTO `z_auth_rule` VALUES ('37', 'Admin/AdminGroup/glist', '组列表', '0', '1', '', '36');
-INSERT INTO `z_auth_rule` VALUES ('36', 'Admin/AdminGroup/', '管理员组管理', '0', '1', '', '0');
+INSERT INTO `z_auth_rule` VALUES ('36', 'Admin/AdminGroup/glist', '管理员组管理', '0', '1', '', '0');
 INSERT INTO `z_auth_rule` VALUES ('40', 'Admin/AdminGroup/doEditAdminGroup', '组编辑', '0', '1', '', '36');
 INSERT INTO `z_auth_rule` VALUES ('42', 'Admin/Admin/doAddAdmin', '管理员添加', '0', '1', '', '18');
 INSERT INTO `z_auth_rule` VALUES ('39', 'Admin/AdminGroup/doDelAdminGroup', '组删除', '0', '1', '', '36');
@@ -136,6 +135,9 @@ INSERT INTO `z_auth_rule` VALUES ('43', 'Admin/Admin/doAdminDel', '管理员删�
 INSERT INTO `z_auth_rule` VALUES ('44', 'Admin/Admin/viewAdmin', '管理员查看', '0', '1', '', '18');
 INSERT INTO `z_auth_rule` VALUES ('45', 'Admin/AdminGroup/viewAdminGroup', '组查看', '0', '1', '', '36');
 INSERT INTO `z_auth_rule` VALUES ('46', 'Admin/AuthRule/viewRule', '查看规则', '0', '1', '', '1');
+INSERT INTO `z_auth_rule` VALUES ('47', 'Admin/Record/rlist', '肌肤测试管理', '0', '1', '', '0');
+INSERT INTO `z_auth_rule` VALUES ('48', 'Admin/Record/rlist', '记录列表', '0', '1', '', '47');
+INSERT INTO `z_auth_rule` VALUES ('50', 'Admin/Record/doDelRecord', '记录删除', '0', '1', '', '47');
 
 -- ----------------------------
 -- Table structure for z_log

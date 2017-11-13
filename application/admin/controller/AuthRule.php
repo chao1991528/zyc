@@ -8,10 +8,10 @@ use app\admin\common\AdminController;
  * 规则控制器类
  */
 class AuthRule extends AdminController {
-    protected $authMethod = ['ruleList', 'doEditRule', 'viewRule', 'doAddRule', 'doDelRule'];
 
     protected $beforeActionList = [
         'loginNeed',
+        'checkAuth' => ['except' => 'doRuleList,localisation'],
         'leftMenuData' =>  ['only'=>'ruleList']
     ];
 
